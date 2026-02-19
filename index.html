@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#702C2B" />
+  <title>Mis XV Años, Daira | Invitación</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --wine:#702C2B;
+      --rose:#C56669;
+      --blush:#DB9F95;
+      --soft:#F3D7D4;
+      --sand:#EEDBCE;
+
+      --text:#241515;
+      --muted: rgba(36,21,21,.70);
+
+      --bg: radial-gradient(1200px 700px at 25% 10%, rgba(243,215,212,.55), transparent 55%),
+            radial-gradient(900px 600px at 85% 20%, rgba(238,219,206,.55), transparent 55%),
+            linear-gradient(180deg, #fff 0%, rgba(243,215,212,.22) 55%, #fff 100%);
+
+      --radius: 26px;
+      --radius-sm: 18px;
+      --border: rgba(112,44,43,.14);
+      --shadow: 0 22px 70px rgba(112,44,43,.14);
+      --max: 1020px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; }
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+
+    .wrap{ max-width: var(--max); margin:0 auto; padding: 18px; }
+
+    /* ===== HERO full-screen premium ===== */
+    .hero{
+      min-height: 92vh;
+      display:grid;
+      place-items:center;
+      padding: 14px 0 8px;
+    }
+
+    .hero-frame{
+      width:100%;
+      border-radius: clamp(18px, 3vw, 36px);
+      overflow:hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      background: #fff;
+      position:relative;
+    }
+
+    .hero-cover{
+      position:relative;
+      height: 92vh;
+      min-height: 660px;
+      background: #f7f1f0;
+    }
+
+    .hero-cover img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: 50% 25%;
+      display:block;
+      transform: scale(1.02);
+      filter: contrast(1.02) saturate(1.02);
+    }
+
+    /* overlay editorial */
+    .hero-cover::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 420px at 60% 20%, rgba(243,215,212,.36), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.06) 28%, rgba(0,0,0,.18) 70%, rgba(0,0,0,.34) 100%);
+      pointer-events:none;
+    }
+
+    /* panel texto sobre la foto (como referencia) */
+    .hero-panel{
+      position:absolute;
+      left: 50%;
+      bottom: clamp(18px, 4vw, 36px);
+      transform: translateX(-50%);
+      width: min(780px, calc(100% - 26px));
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 60px rgba(0,0,0,.18);
+      padding: clamp(18px, 3.2vw, 28px);
+    }
+
+    .kicker{
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(36,21,21,.65);
+      margin-bottom: 10px;
+    }
+    .kdot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--rose);
+      box-shadow: 0 0 0 8px rgba(197,102,105,.14);
+    }
+
+    .title{
+      font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
+      font-weight: 700;
+      color: var(--wine);
+      text-align:center;
+      margin:0;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: .92;
+      letter-spacing: .2px;
+    }
+    .sub{
+      text-align:center;
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .sub strong{ color: rgba(36,21,21,.88); }
+
+    .cta{
+      display:flex; flex-wrap:wrap; gap:10px;
+      justify-content:center;
+      margin-top: 16px;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: 650;
+      font-size: 14px;
+      user-select:none;
+      border: 1px solid transparent;
+      transition: transform .08s ease, filter .12s ease;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn-primary{
+      background: var(--wine);
+      color:#fff;
+      box-shadow: 0 12px 28px rgba(112,44,43,.22);
+    }
+    .btn-ghost{
+      background: rgba(255,255,255,.72);
+      border-color: rgba(112,44,43,.16);
+      color: var(--wine);
+    }
+
+    /* countdown minimal */
+    .countdown{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .tbox{
+      background: rgba(243,215,212,.40);
+      border: 1px solid rgba(112,44,43,.12);
+      border-radius: 18px;
+      padding: 12px 10px;
+      text-align:center;
+    }
+    .num{
+      font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
+      font-size: clamp(22px, 3.2vw, 32px);
+      font-weight: 700;
+      color: var(--wine);
+      line-height: 1;
+    }
+    .lbl{
+      margin-top: 6px;
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(36,21,21,.58);
+    }
+    @media (max-width: 560px){
+      .countdown{ grid-template-columns: repeat(2, 1fr); }
+      .hero-cover{ min-height: 720px; }
+    }
+
+    /* ===== Secciones (editorial, menos “tarjetas repetidas”) ===== */
+    .section{
+      margin-top: 18px;
+      padding: 4px 0;
+    }
+    .section-head{
+      display:flex; align-items:baseline; justify-content:space-between;
+      gap: 14px;
+      margin: 0 0 10px;
+    }
+    .section-title{
+      font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--wine);
+      margin:0;
+      letter-spacing:.2px;
+    }
+    .line{
+      height:1px;
+      flex: 1;
+      background: linear-gradient(90deg, rgba(112,44,43,.20), rgba(112,44,43,0));
+      border-radius:999px;
+      margin-top: 18px;
+    }
+
+    .panel{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panel-inner{ padding: 18px; }
+
+    .two-col{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 14px;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .two-col{ grid-template-columns: 1fr; }
+    }
+
+    .info{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .info strong{ color: rgba(36,21,21,.88); }
+
+    .map{
+      width:100%;
+      height: 340px;
+      border: 1px solid rgba(112,44,43,.12);
+      border-radius: 20px;
+      overflow:hidden;
+      background: rgba(238,219,206,.25);
+    }
+    .map iframe{ width:100%; height:100%; border:0; }
+
+    /* Galería */
+    .hint{ margin: 10px 0 0; color: rgba(36,21,21,.62); font-size: 14px; }
+    .grid{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 560px){ .grid{ gap: 8px; } }
+    .thumb{
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(112,44,43,.12);
+      background: rgba(238,219,206,.18);
+      cursor:pointer;
+      aspect-ratio: 1/1;
+    }
+    .thumb img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      transition: transform .18s ease;
+    }
+    .thumb:hover img{ transform: scale(1.02); }
+
+    /* Lightbox */
+    .lightbox{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.74);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 999;
+    }
+    .lightbox.open{ display:flex; }
+    .lb-content{
+      max-width: 980px;
+      width: 100%;
+      max-height: 86vh;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .lb-img{
+      background:#111;
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      display:flex; align-items:center; justify-content:center;
+      max-height: 78vh;
+    }
+    .lb-img img{ max-width:100%; max-height:78vh; object-fit:contain; }
+    .lb-bar{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      color:#fff; font-size:14px; opacity:.92;
+    }
+    .lb-btn{
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      color:#fff;
+      padding: 10px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+    }
+
+    /* Footer */
+    footer{
+      margin: 22px 0 30px;
+      text-align:center;
+      color: rgba(36,21,21,.62);
+      font-size: 13px;
+    }
+    .footer-logo{ margin-top: 10px; display:flex; justify-content:center; }
+    .footer-logo img{ height: 34px; width:auto; opacity:.92; filter: drop-shadow(0 8px 22px rgba(112,44,43,.12)); }
+
+    /* Animaciones suaves */
+    .reveal{ opacity:0; transform: translateY(14px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal.in{ opacity:1; transform: translateY(0); }
+
+    /* Música floating */
+    .music-fab{
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 998;
+      display:flex; align-items:center; gap:10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.86);
+      border: 1px solid rgba(112,44,43,.16);
+      box-shadow: 0 14px 30px rgba(112,44,43,.18);
+      color: var(--wine);
+      font-weight: 700;
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+      backdrop-filter: blur(10px);
+    }
+    .music-fab .dot{
+      width: 10px; height: 10px; border-radius: 999px;
+      background: var(--rose);
+      box-shadow: 0 0 0 8px rgba(197,102,105,.14);
+    }
+    .music-fab.hidden{ display:none; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- HERO -->
+    <header class="hero" id="inicio">
+      <div class="hero-frame">
+        <div class="hero-cover">
+          <img src="assets/hero.jpg" alt="Daira Pérez Romero">
+
+          <div class="hero-panel">
+            <div class="kicker"><span class="kdot"></span> 28 de marzo 2026 · CDMX</div>
+            <h1 class="title">Mis XV Años, Daira</h1>
+            <p class="sub">
+              <strong>Daira Pérez Romero</strong><br>
+              Misa <strong>15:00 hrs</strong> · Recepción <strong>16:30 hrs</strong>
+            </p>
+
+            <div class="countdown" aria-label="Cuenta regresiva">
+              <div class="tbox"><div class="num" id="dd">--</div><div class="lbl">Días</div></div>
+              <div class="tbox"><div class="num" id="hh">--</div><div class="lbl">Horas</div></div>
+              <div class="tbox"><div class="num" id="mm">--</div><div class="lbl">Minutos</div></div>
+              <div class="tbox"><div class="num" id="ss">--</div><div class="lbl">Segundos</div></div>
+            </div>
+
+            <div class="cta">
+              <a class="btn btn-primary" id="btn-whatsapp" href="#" target="_blank" rel="noopener">Confirmar asistencia</a>
+              <a class="btn btn-ghost" href="#ubicaciones">Ver ubicaciones</a>
+              <a class="btn btn-ghost" href="#regalos">Mesa de regalos</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- UBICACIONES -->
+    <section id="ubicaciones" class="section reveal">
+      <div class="section-head">
+        <h2 class="section-title">Ubicaciones</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="two-col">
+            <div>
+              <p class="info">
+                <strong>Misa · 15:00 hrs</strong><br>
+                PARROQUIA DE NUESTRA SEÑORA DE LA PAZ, PASEOS DE CHURUBUSCO
+              </p>
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn btn-primary" href="https://maps.app.goo.gl/7fiqxCDvtAW4DVUB8" target="_blank" rel="noopener">Abrir misa</a>
+                <a class="btn btn-ghost" href="#recepcion">Ir a recepción</a>
+              </div>
+            </div>
+
+            <div class="map">
+              <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Parroquia%20de%20Nuestra%20Se%C3%B1ora%20de%20la%20Paz%20Paseos%20de%20Churubusco&output=embed">
+              </iframe>
+            </div>
+          </div>
+
+          <hr style="border:0; border-top:1px solid rgba(112,44,43,.10); margin: 16px 0;">
+
+          <div class="two-col" id="recepcion">
+            <div>
+              <p class="info">
+                <strong>Recepción · 16:30 hrs</strong><br>
+                SALÓN GRISSEL
+              </p>
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn btn-primary" href="https://maps.app.goo.gl/Lnk4KmBMn2SB23AW8" target="_blank" rel="noopener">Abrir recepción</a>
+                <a class="btn btn-ghost" href="#galeria">Ver galería</a>
+              </div>
+            </div>
+
+            <div class="map">
+              <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Sal%C3%B3n%20Grissel&output=embed">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <section id="galeria" class="section reveal">
+      <div class="section-head">
+        <h2 class="section-title">Galería</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-inner">
+          <p class="info">Toca una foto para verla en grande.</p>
+
+          <div class="grid" id="galleryGrid">
+            <div class="thumb"><img src="assets/gallery/01.jpg" alt="Foto 1" loading="lazy"></div>
+            <div class="thumb"><img src="assets/gallery/02.jpg" alt="Foto 2" loading="lazy"></div>
+            <div class="thumb"><img src="assets/gallery/03.jpg" alt="Foto 3" loading="lazy"></div>
+            <div class="thumb"><img src="assets/gallery/04.jpg" alt="Foto 4" loading="lazy"></div>
+            <div class="thumb"><img src="assets/gallery/05.jpg" alt="Foto 5" loading="lazy"></div>
+            <div class="thumb"><img src="assets/gallery/06.jpg" alt="Foto 6" loading="lazy"></div>
+            <div class="thumb"><img src="assets/gallery/07.jpg" alt="Foto 7" loading="lazy"></div>
+            <div class="thumb"><img src="assets/gallery/08.jpg" alt="Foto 8" loading="lazy"></div>
+            <div class="thumb"><img src="assets/gallery/09.jpg" alt="Foto 9" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGALOS -->
+    <section id="regalos" class="section reveal">
+      <div class="section-head">
+        <h2 class="section-title">Mesa de regalos</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-inner">
+          <p class="info">Liverpool · Número: <strong>51947356</strong></p>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn-primary" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51947356" target="_blank" rel="noopener">Abrir mesa</a>
+            <button class="btn btn-ghost" id="copyGift" type="button">Copiar número</button>
+          </div>
+          <p class="hint" id="copyGiftHint"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONFIRMACIÓN -->
+    <section id="confirmacion" class="section reveal">
+      <div class="section-head">
+        <h2 class="section-title">Confirmación</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-inner">
+          <p class="info">Confirma tu asistencia por WhatsApp.</p>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn-primary" id="btn-whatsapp-2" href="#" target="_blank" rel="noopener">Confirmar ahora</a>
+            <a class="btn btn-ghost" href="#inicio">Volver arriba</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="reveal">
+      <div>Invitación creada por <strong>Invytia MX</strong></div>
+      <div class="footer-logo">
+        <img src="assets/logo-invytia.png" alt="Invytia MX">
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lb-content">
+      <div class="lb-bar">
+        <div id="lbCounter">Foto</div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <button class="lb-btn" id="lbPrev" type="button">←</button>
+          <button class="lb-btn" id="lbNext" type="button">→</button>
+          <button class="lb-btn" id="lbClose" type="button">Cerrar ✕</button>
+        </div>
+      </div>
+      <div class="lb-img">
+        <img id="lbImg" src="" alt="Foto en grande">
+      </div>
+    </div>
+  </div>
+
+  <!-- Música (sin texto técnico) -->
+  <div class="music-fab hidden" id="musicFab" role="button" aria-label="Activar música">
+    <span class="dot" aria-hidden="true"></span>
+    <span id="musicFabText">Música</span>
+  </div>
+
+  <audio id="audio" preload="auto">
+    <source src="assets/song.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    // Countdown termina a la misa: 28 marzo 2026 15:00
+    const EVENT_DATE = new Date(2026, 2, 28, 15, 0, 0);
+    const WHATSAPP_NUMBER = "525532327877";
+    const WHATSAPP_MESSAGE = "Hola, confirmo mi asistencia a los XV años de Daira Pérez Romero. Mi nombre es: _____. Asistiremos: ____ personas. ¡Gracias!";
+
+    // WhatsApp
+    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+    document.getElementById("btn-whatsapp").href = waUrl;
+    document.getElementById("btn-whatsapp-2").href = waUrl;
+
+    // Countdown
+    const dd = document.getElementById("dd");
+    const hh = document.getElementById("hh");
+    const mm = document.getElementById("mm");
+    const ss = document.getElementById("ss");
+    const pad = (n) => String(n).padStart(2,"0");
+
+    function tick(){
+      const now = new Date();
+      const diff = EVENT_DATE - now;
+      if(diff <= 0){
+        dd.textContent="00"; hh.textContent="00"; mm.textContent="00"; ss.textContent="00";
+        return;
+      }
+      const t = Math.floor(diff/1000);
+      const days = Math.floor(t/86400);
+      const hours = Math.floor((t%86400)/3600);
+      const mins = Math.floor((t%3600)/60);
+      const secs = t%60;
+
+      dd.textContent = String(days);
+      hh.textContent = pad(hours);
+      mm.textContent = pad(mins);
+      ss.textContent = pad(secs);
+    }
+    tick(); setInterval(tick, 1000);
+
+    // Copy gift number
+    const copyGiftBtn = document.getElementById("copyGift");
+    const copyGiftHint = document.getElementById("copyGiftHint");
+    copyGiftBtn.addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText("51947356");
+        copyGiftHint.textContent = "Copiado ✅";
+      }catch(e){
+        copyGiftHint.textContent = "Número: 51947356";
+      }
+    });
+
+    // Animaciones
+    const revealEls = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    // Galería lightbox
+    const grid = document.getElementById("galleryGrid");
+    const thumbs = Array.from(grid.querySelectorAll("img"));
+    const lightbox = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const lbCounter = document.getElementById("lbCounter");
+    const lbClose = document.getElementById("lbClose");
+    const lbPrev = document.getElementById("lbPrev");
+    const lbNext = document.getElementById("lbNext");
+    let currentIndex = 0;
+
+    function openLightbox(index){
+      currentIndex = index;
+      lbImg.src = thumbs[currentIndex].src;
+      lbCounter.textContent = `Foto ${currentIndex+1} de ${thumbs.length}`;
+      lightbox.classList.add("open");
+      document.body.style.overflow="hidden";
+    }
+    function closeLightbox(){
+      lightbox.classList.remove("open");
+      document.body.style.overflow="";
+      lbImg.src="";
+    }
+    thumbs.forEach((img, idx) => {
+      img.addEventListener("click", () => openLightbox(idx));
+      img.parentElement.tabIndex = 0;
+      img.parentElement.setAttribute("role","button");
+    });
+    lbClose.addEventListener("click", closeLightbox);
+    lbPrev.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + thumbs.length) % thumbs.length;
+      lbImg.src = thumbs[currentIndex].src;
+      lbCounter.textContent = `Foto ${currentIndex+1} de ${thumbs.length}`;
+    });
+    lbNext.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % thumbs.length;
+      lbImg.src = thumbs[currentIndex].src;
+      lbCounter.textContent = `Foto ${currentIndex+1} de ${thumbs.length}`;
+    });
+    lightbox.addEventListener("click", (e) => { if(e.target === lightbox) closeLightbox(); });
+    window.addEventListener("keydown", (e) => {
+      if(!lightbox.classList.contains("open")) return;
+      if(e.key === "Escape") closeLightbox();
+      if(e.key === "ArrowLeft") lbPrev.click();
+      if(e.key === "ArrowRight") lbNext.click();
+    });
+
+    // Música autoplay + fallback
+    const audio = document.getElementById("audio");
+    const musicFab = document.getElementById("musicFab");
+    const musicFabText = document.getElementById("musicFabText");
+
+    async function tryAutoPlay(){
+      try{
+        audio.volume = 0.85;
+        await audio.play();
+        musicFab.classList.add("hidden");
+      }catch(err){
+        musicFab.classList.remove("hidden");
+      }
+    }
+    window.addEventListener("load", () => { tryAutoPlay(); });
+
+    musicFab.addEventListener("click", async () => {
+      try{
+        await audio.play();
+        musicFabText.textContent = "Sonando";
+        setTimeout(()=>musicFab.classList.add("hidden"), 800);
+      }catch(e){
+        musicFabText.textContent = "Música";
+      }
+    });
+
+    document.addEventListener("click", () => {
+      if(audio.paused) tryAutoPlay();
+    }, { once:true });
+  </script>
+</body>
+</html>
