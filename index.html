@@ -3,872 +3,713 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#702C2B" />
-  <title>Mis XV Años, Daira | Invitación</title>
+  <meta name="theme-color" content="#efe7da" />
+  <title>XV Años de Daira</title>
+  <meta name="description" content="Invitación digital a los XV años de Daira. 28 de marzo. Misa y recepción con ubicaciones, música, galería y confirmación por WhatsApp." />
 
+  <!-- Fonts (elegante: script + serif + sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --wine:#702C2B;
-      --rose:#C56669;
-      --blush:#DB9F95;
-      --soft:#F3D7D4;
-      --sand:#EEDBCE;
-
-      --text:#241515;
-      --muted: rgba(36,21,21,.70);
-
-      --border: rgba(112,44,43,.16);
-      --shadow: 0 26px 90px rgba(112,44,43,.14);
-
-      --radius: 28px;
-      --radius-sm: 18px;
-      --max: 1040px;
-
-      --glass: rgba(255,255,255,.80);
-      --glass-strong: rgba(255,255,255,.86);
+      /* Papel + rosa acuarela */
+      --paper: #efe7da;
+      --paper2:#f6f1e8;
+      --ink:   #111014;
+      --muted: #5f5a5f;
+      --blush: #f7b3d6;
+      --blush2:#ef7ab1;
+      --line:  rgba(17,16,20,.10);
+      --card:  rgba(255,255,255,.66);
+      --shadow: 0 14px 40px rgba(17,16,20,.10);
+      --radius: 18px;
+      --max: 980px;
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ margin:0; padding:0; }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(1200px 760px at 20% 10%, rgba(243,215,212,.65), transparent 55%),
-        radial-gradient(900px 600px at 85% 20%, rgba(238,219,206,.65), transparent 55%),
-        linear-gradient(180deg, #fff 0%, rgba(243,215,212,.18) 60%, #fff 100%);
-      overflow-x:hidden;
-    }
-    a{ color:inherit; text-decoration:none; }
-    .wrap{ max-width: var(--max); margin:0 auto; padding: 18px; }
-
-    /* ===== Grain premium (sutil) ===== */
-    .grain{
-      pointer-events:none;
-      position: fixed;
-      inset: -40%;
-      opacity: .07;
-      z-index: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-      transform: rotate(6deg);
-    }
-
-    /* ===== HERO ===== */
-    .hero{
-      min-height: 92vh;
-      display:grid;
-      place-items:center;
-      padding: 14px 0 10px;
-      position:relative;
-      z-index: 1;
-    }
-
-    .hero-frame{
-      width:100%;
-      border-radius: clamp(18px, 3vw, 40px);
-      overflow:hidden;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      background: #fff;
-      position:relative;
-    }
-
-    /* “borde interior” premium */
-    .hero-frame::before{
-      content:"";
-      position:absolute; inset: 12px;
-      border-radius: clamp(14px, 2.4vw, 34px);
-      border: 1px solid rgba(255,255,255,.38);
-      box-shadow: inset 0 0 0 1px rgba(112,44,43,.12);
-      pointer-events:none;
-      z-index: 3;
-    }
-
-    .hero-cover{
-      position:relative;
-      height: 92vh;
-      min-height: 700px;
-      background: #f7f1f0;
-      overflow:hidden;
-    }
-    @media (max-width: 560px){
-      .hero-cover{ min-height: 760px; }
-    }
-
-    .hero-cover img{
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      object-position: 50% 22%;
-      display:block;
-
-      /* Ken Burns super sutil */
-      transform: scale(1.06);
-      animation: kenburns 16s ease-in-out infinite alternate;
-      filter: contrast(1.03) saturate(1.03);
-    }
-    @keyframes kenburns{
-      from { transform: scale(1.06) translateY(0px); }
-      to   { transform: scale(1.10) translateY(-8px); }
-    }
-
-    /* Vignette + tono editorial */
-    .hero-cover::after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(900px 480px at 55% 18%, rgba(243,215,212,.38), transparent 62%),
-        radial-gradient(900px 520px at 50% 110%, rgba(0,0,0,.52), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.14) 0%, rgba(0,0,0,.08) 36%, rgba(0,0,0,.18) 72%, rgba(0,0,0,.36) 100%);
-      pointer-events:none;
-      z-index: 2;
-    }
-
-    /* Panel glass */
-    .hero-panel{
-      position:absolute;
-      left: 50%;
-      bottom: clamp(18px, 4vw, 38px);
-      transform: translateX(-50%);
-      width: min(820px, calc(100% - 26px));
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,.28);
-      background: var(--glass);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 22px 70px rgba(0,0,0,.22);
-      padding: clamp(18px, 3.4vw, 30px);
-      z-index: 4;
-    }
-
-    .kicker{
-      display:flex; align-items:center; justify-content:center; gap:10px;
-      font-size: 12px;
-      letter-spacing: .26em;
-      text-transform: uppercase;
-      color: rgba(36,21,21,.65);
-      margin-bottom: 10px;
-    }
-    .kdot{
-      width:10px; height:10px; border-radius:999px;
-      background: var(--rose);
-      box-shadow: 0 0 0 9px rgba(197,102,105,.14);
-    }
-
-    .title{
-      font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
-      font-weight: 700;
-      color: var(--wine);
-      text-align:center;
       margin:0;
-      font-size: clamp(44px, 6.2vw, 76px);
-      line-height: .90;
-      letter-spacing: .2px;
-    }
-
-    .orn{
-      display:flex; justify-content:center;
-      margin: 10px 0 8px;
-      opacity: .92;
-    }
-    .orn svg{ width: 220px; max-width: 56vw; }
-    .orn path{ stroke: rgba(112,44,43,.55); }
-
-    .sub{
-      text-align:center;
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 15px;
-    }
-    .sub strong{ color: rgba(36,21,21,.88); }
-
-    /* Countdown premium */
-    .countdown{
-      margin-top: 16px;
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-    .tbox{
-      border-radius: 18px;
-      background: rgba(243,215,212,.34);
-      border: 1px solid rgba(112,44,43,.12);
-      padding: 12px 10px;
-      text-align:center;
-      position:relative;
-      overflow:hidden;
-    }
-    /* highlight suave */
-    .tbox::before{
-      content:"";
-      position:absolute; inset:-40%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), transparent 60%);
-      transform: rotate(18deg);
-      opacity: .35;
-      pointer-events:none;
-    }
-    .num{
-      font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
-      font-size: clamp(22px, 3.2vw, 34px);
-      font-weight: 700;
-      color: var(--wine);
-      line-height: 1;
-      position:relative;
-    }
-    .lbl{
-      margin-top: 6px;
-      font-size: 11px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: rgba(36,21,21,.58);
-      position:relative;
-    }
-    @media (max-width: 560px){
-      .countdown{ grid-template-columns: repeat(2, 1fr); }
-    }
-
-    /* Botones premium */
-    .cta{
-      display:flex; flex-wrap:wrap; gap:10px;
-      justify-content:center;
-      margin-top: 16px;
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding: 12px 18px;
-      border-radius: 999px;
-      font-weight: 650;
-      font-size: 14px;
-      border: 1px solid transparent;
-      transition: transform .10s ease, filter .18s ease, background .18s ease;
-      user-select:none;
-    }
-    .btn:active{ transform: translateY(1px); }
-    .btn-primary{
-      color:#fff;
+      color:var(--ink);
       background:
-        linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0)),
-        linear-gradient(180deg, #7a3231, #5f2322);
-      border-color: rgba(255,255,255,.18);
-      box-shadow: 0 14px 30px rgba(112,44,43,.24);
-      position:relative;
-      overflow:hidden;
-    }
-    /* shimmer premium */
-    .btn-primary::after{
-      content:"";
-      position:absolute;
-      top:-40%; left:-40%;
-      width: 60%;
-      height: 200%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.30), transparent);
-      transform: rotate(18deg) translateX(-140%);
-      transition: transform .9s ease;
-      opacity: .55;
-    }
-    .btn-primary:hover::after{
-      transform: rotate(18deg) translateX(260%);
+        radial-gradient(900px 520px at 18% 0%, rgba(247,179,214,.18), transparent 55%),
+        radial-gradient(760px 520px at 92% 10%, rgba(239,122,177,.12), transparent 55%),
+        linear-gradient(180deg, var(--paper) 0%, var(--paper2) 52%, var(--paper) 100%);
+      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.45;
     }
 
-    .btn-ghost{
-      background: rgba(255,255,255,.72);
-      border-color: rgba(112,44,43,.16);
-      color: var(--wine);
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px;}
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(239,231,218,.72);
+      border-bottom:1px solid var(--line);
     }
-    .btn:hover{ filter: brightness(1.02); }
-
-    /* ===== Secciones ===== */
-    .section{
-      margin-top: 18px;
-      padding: 6px 0;
-      position:relative;
-      z-index: 1;
+    .topbar .in{
+      height:64px; display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
     }
-    .section-head{
-      display:flex; align-items:baseline; justify-content:space-between;
-      gap: 14px;
-      margin: 0 0 10px;
-    }
-    .section-title{
-      font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--wine);
-      margin:0;
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width:160px;
+      font-family:"Cormorant Garamond", serif;
       letter-spacing:.2px;
     }
-    .line{
-      height:1px;
-      flex: 1;
-      background: linear-gradient(90deg, rgba(112,44,43,.24), rgba(112,44,43,0));
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, var(--blush), var(--blush2));
+      box-shadow: 0 6px 18px rgba(239,122,177,.28);
+      flex:0 0 auto;
+    }
+    .nav{
+      display:flex; gap:14px; flex-wrap:wrap;
+      font-size:12px; color:rgba(17,16,20,.65);
+      justify-content:flex-end;
+    }
+    .nav a{
+      text-decoration:none;
+      padding:8px 10px;
       border-radius:999px;
-      margin-top: 18px;
+      border:1px solid transparent;
     }
+    .nav a:hover{border-color:var(--line); background: rgba(255,255,255,.55);}
 
-    .panel{
+    .hero{padding:34px 0 18px;}
+    .card{
+      border:1px solid var(--line);
+      background: var(--card);
       border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.78);
       box-shadow: var(--shadow);
-      overflow:hidden;
+    }
+    .heroCard{
+      padding:22px 18px;
       position:relative;
-    }
-    /* “tinta” suave para profundidad */
-    .panel::before{
-      content:"";
-      position:absolute; inset:-120px -120px auto auto;
-      width: 320px; height: 320px;
-      background: radial-gradient(circle at 30% 30%, rgba(197,102,105,.18), transparent 62%);
-      transform: rotate(20deg);
-      pointer-events:none;
-      opacity:.6;
-    }
-    .panel-inner{ padding: 18px; position:relative; }
-
-    .two-col{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 14px;
-      align-items:start;
-    }
-    @media (max-width: 900px){
-      .two-col{ grid-template-columns: 1fr; }
-    }
-
-    .info{
-      margin:0;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 15px;
-    }
-    .info strong{ color: rgba(36,21,21,.88); }
-
-    /* Timeline (se ve premium vs texto plano) */
-    .timeline{
-      margin-top: 12px;
-      display:grid;
-      gap: 10px;
-    }
-    .event{
-      border-radius: 20px;
-      border: 1px solid rgba(112,44,43,.12);
-      background: rgba(243,215,212,.26);
-      padding: 14px;
-      display:flex;
-      gap: 12px;
-      align-items:flex-start;
-    }
-    .time{
-      flex: 0 0 auto;
-      width: 84px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.75);
-      border: 1px solid rgba(112,44,43,.12);
-      text-align:center;
-      padding: 10px 8px;
-      color: var(--wine);
-      font-weight: 800;
-    }
-    .time span{
-      display:block;
-      font-size: 11px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      opacity:.7;
-      margin-top: 4px;
-      font-weight: 700;
-    }
-
-    .map{
-      width:100%;
-      height: 340px;
-      border: 1px solid rgba(112,44,43,.12);
-      border-radius: 22px;
       overflow:hidden;
-      background: rgba(238,219,206,.25);
     }
-    .map iframe{ width:100%; height:100%; border:0; }
+    .watermark{
+      position:absolute; inset:auto -40px -60px auto;
+      width:220px; height:220px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(247,179,214,.75), rgba(239,122,177,.18));
+      filter: blur(2px);
+      transform: rotate(12deg);
+      opacity:.70;
+      pointer-events:none;
+    }
+    .kicker{
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-size:11px;
+      color:rgba(17,16,20,.55);
+      text-align:center;
+      margin:0 0 8px;
+    }
+    .name{
+      font-family:"Great Vibes", cursive;
+      font-size:58px;
+      line-height:1;
+      text-align:center;
+      margin:0;
+    }
+    .subtitle{
+      font-family:"Cormorant Garamond", serif;
+      text-align:center;
+      margin:10px 0 0;
+      font-size:18px;
+      color:rgba(17,16,20,.72);
+    }
 
-    /* Galería */
+    .pillRow{
+      display:flex; gap:10px; flex-wrap:wrap;
+      justify-content:center;
+      margin:16px 0 0;
+    }
+    .pill{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:12px;
+      background: rgba(255,255,255,.58);
+      color:rgba(17,16,20,.72);
+    }
+
+    .countdown{
+      margin:18px auto 0;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+      max-width:560px;
+    }
+    .cdBox{
+      background: rgba(255,255,255,.72);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:12px 10px;
+      text-align:center;
+    }
+    .cdNum{
+      font-family:"Cormorant Garamond", serif;
+      font-size:30px;
+      font-weight:600;
+      letter-spacing:.02em;
+    }
+    .cdLbl{
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(17,16,20,.55);
+      margin-top:2px;
+    }
+
+    .actions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      justify-content:center;
+      margin:16px 0 0;
+    }
+    .btn{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.70);
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:600;
+      font-size:13px;
+      text-decoration:none;
+      display:inline-flex; align-items:center; gap:8px;
+      cursor:pointer;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover{background: rgba(255,255,255,.86); border-color: rgba(17,16,20,.16);}
+    .btn:active{transform: translateY(1px);}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(247,179,214,.95), rgba(239,122,177,.88));
+      border-color: transparent;
+      color:#1b0d14;
+      box-shadow: 0 10px 26px rgba(239,122,177,.22);
+    }
+    .note{
+      text-align:center;
+      font-size:12px;
+      color:rgba(17,16,20,.62);
+      margin:12px 0 0;
+    }
+
+    section{padding:16px 0;}
+    .sectionCard{padding:18px;}
+    .h2{
+      font-family:"Cormorant Garamond", serif;
+      font-size:26px;
+      margin:0 0 8px;
+      letter-spacing:.01em;
+      text-align:center;
+    }
+    .p{
+      margin:0;
+      color:rgba(17,16,20,.68);
+      font-size:13px;
+      text-align:center;
+    }
+    .divider{
+      width:84px; height:2px;
+      background: linear-gradient(90deg, transparent, rgba(239,122,177,.65), transparent);
+      margin:14px auto 14px;
+      border-radius:999px;
+    }
+
+    .eventGrid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+    .eventItem{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background: rgba(255,255,255,.68);
+      padding:14px;
+      overflow:hidden;
+    }
+    .eventTitle{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    }
+    .eventTitle h3{
+      font-family:"Cormorant Garamond", serif;
+      font-size:20px; margin:0;
+    }
+    .timeTag{
+      border:1px solid rgba(239,122,177,.35);
+      background: rgba(247,179,214,.30);
+      color: rgba(27,13,20,.78);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12px;
+      font-weight:600;
+      white-space:nowrap;
+    }
+    .eventMeta{
+      margin-top:6px;
+      color:rgba(17,16,20,.66);
+      font-size:13px;
+    }
+    .mapWrap{
+      margin-top:12px;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.60);
+    }
+    iframe{display:block; width:100%; height:280px; border:0;}
+
+    /* Gallery */
+    .galleryHint{
+      margin:10px 0 0;
+      font-size:12px;
+      color:rgba(17,16,20,.62);
+      text-align:center;
+    }
     .grid{
-      margin-top: 14px;
+      margin-top:14px;
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap:10px;
     }
-    @media (max-width: 560px){ .grid{ gap: 8px; } }
     .thumb{
-      border-radius: 20px;
+      position:relative;
+      border-radius:14px;
       overflow:hidden;
-      border: 1px solid rgba(112,44,43,.12);
-      background: rgba(238,219,206,.18);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.62);
       cursor:pointer;
       aspect-ratio: 1/1;
-      position:relative;
     }
     .thumb img{
       width:100%; height:100%;
-      object-fit: cover;
+      object-fit:cover;
       display:block;
-      transition: transform .22s ease, filter .22s ease;
+      transform: scale(1.02);
+      transition: transform .25s ease, filter .25s ease;
+      filter: saturate(1.02) contrast(1.02);
     }
+    .thumb:hover img{transform: scale(1.06);}
     .thumb::after{
       content:"";
       position:absolute; inset:0;
-      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.40), transparent 60%),
-                  linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.10));
-      opacity: .0;
-      transition: opacity .22s ease;
+      background: radial-gradient(500px 220px at 40% 15%, rgba(247,179,214,.25), transparent 55%);
+      opacity:.55;
       pointer-events:none;
     }
-    .thumb:hover img{ transform: scale(1.03); filter: contrast(1.02); }
-    .thumb:hover::after{ opacity: .35; }
 
-    /* Lightbox */
-    .lightbox{
+    /* Lightbox modal */
+    .modal{
       position:fixed; inset:0;
-      background: rgba(0,0,0,.74);
+      background: rgba(17,16,20,.78);
       display:none;
-      align-items:center;
-      justify-content:center;
-      padding: 18px;
-      z-index: 999;
+      align-items:center; justify-content:center;
+      padding:18px;
+      z-index:50;
     }
-    .lightbox.open{ display:flex; }
-    .lb-content{
+    .modal.open{display:flex;}
+    .modalInner{
       max-width: 980px;
-      width: 100%;
-      max-height: 86vh;
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-    }
-    .lb-img{
-      background:#111;
-      border-radius: 18px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.12);
-      display:flex; align-items:center; justify-content:center;
-      max-height: 78vh;
-    }
-    .lb-img img{ max-width:100%; max-height:78vh; object-fit:contain; }
-    .lb-bar{
-      display:flex; justify-content:space-between; align-items:center; gap:10px;
-      color:#fff; font-size:14px; opacity:.92;
-    }
-    .lb-btn{
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.18);
-      color:#fff;
-      padding: 10px 12px;
-      border-radius: 14px;
-      cursor:pointer;
-    }
-
-    footer{
-      margin: 22px 0 30px;
-      text-align:center;
-      color: rgba(36,21,21,.62);
-      font-size: 13px;
+      width:100%;
       position:relative;
-      z-index: 1;
     }
-    .footer-logo{ margin-top: 10px; display:flex; justify-content:center; }
-    .footer-logo img{ height: 34px; width:auto; opacity:.92; filter: drop-shadow(0 8px 22px rgba(112,44,43,.12)); }
-
-    /* Animaciones */
-    .reveal{
-      opacity:0;
-      transform: translateY(18px);
-      filter: blur(6px);
-      transition: opacity .85s ease, transform .85s ease, filter .85s ease;
+    .modalImg{
+      width:100%;
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 22px 60px rgba(0,0,0,.35);
+      display:block;
     }
-    .reveal.in{ opacity:1; transform: translateY(0); filter: blur(0); }
-
-    /* Música premium */
-    .music-fab{
-      position: fixed;
-      right: 14px;
-      bottom: 14px;
-      z-index: 998;
-      display:flex; align-items:center; gap:10px;
-      padding: 12px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.86);
-      border: 1px solid rgba(112,44,43,.16);
-      box-shadow: 0 14px 30px rgba(112,44,43,.18);
-      color: var(--wine);
-      font-weight: 800;
-      font-size: 13px;
+    .closeBtn{
+      position:absolute;
+      top:-10px; right:-10px;
+      width:40px; height:40px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.20);
+      background: rgba(255,255,255,.10);
+      color:#fff;
+      font-size:18px;
       cursor:pointer;
-      user-select:none;
+      display:flex; align-items:center; justify-content:center;
       backdrop-filter: blur(10px);
     }
-    .music-fab .dot{
-      width: 10px; height: 10px; border-radius: 999px;
-      background: var(--rose);
-      box-shadow: 0 0 0 9px rgba(197,102,105,.14);
+
+    /* Gifts */
+    .giftBox{
+      display:flex; flex-direction:column; gap:10px;
+      margin-top:14px;
+      align-items:center;
     }
-    .music-fab.hidden{ display:none; }
+    .giftNumber{
+      font-family:"Cormorant Garamond", serif;
+      font-size:26px;
+      font-weight:600;
+      letter-spacing:.08em;
+      background: rgba(255,255,255,.70);
+      border:1px dashed rgba(239,122,177,.42);
+      padding:10px 14px;
+      border-radius:16px;
+    }
+
+    /* Footer */
+    footer{
+      padding:18px 0 28px;
+      color:rgba(17,16,20,.62);
+      text-align:center;
+      font-size:12px;
+    }
+    .invytia{
+      display:flex; flex-direction:column; align-items:center; gap:10px;
+      margin-top:10px;
+    }
+    .invytia img{
+      width:110px;
+      height:auto;
+      opacity:.9;
+      filter: drop-shadow(0 10px 26px rgba(17,16,20,.10));
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 520px){
+      .name{font-size:52px}
+      iframe{height:240px}
+      .countdown{gap:8px}
+      .cdNum{font-size:26px}
+      .grid{gap:8px}
+      .nav{display:none;} /* limpio en móvil */
+      .brand{min-width:auto}
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .thumb img{transition:none}
+      .btn{transition:none}
+    }
   </style>
 </head>
 
 <body>
-  <div class="grain" aria-hidden="true"></div>
-
-  <div class="wrap">
-
-    <!-- HERO -->
-    <header class="hero" id="inicio">
-      <div class="hero-frame">
-        <div class="hero-cover">
-          <img src="assets/hero.jpg" alt="Daira Pérez Romero">
-
-          <div class="hero-panel">
-            <div class="kicker"><span class="kdot"></span> 28 de marzo 2026 · CDMX</div>
-
-            <h1 class="title">Mis XV Años, Daira</h1>
-
-            <div class="orn" aria-hidden="true">
-              <svg viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 20H120" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M180 20H290" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M150 10C145 14 140 16 135 20C140 24 145 26 150 30C155 26 160 24 165 20C160 16 155 14 150 10Z" stroke-width="1.5" stroke-linejoin="round"/>
-              </svg>
-            </div>
-
-            <p class="sub">
-              <strong>Daira Pérez Romero</strong><br>
-              Misa <strong>15:00 hrs</strong> · Recepción <strong>16:30 hrs</strong>
-            </p>
-
-            <div class="countdown" aria-label="Cuenta regresiva">
-              <div class="tbox"><div class="num" id="dd">--</div><div class="lbl">Días</div></div>
-              <div class="tbox"><div class="num" id="hh">--</div><div class="lbl">Horas</div></div>
-              <div class="tbox"><div class="num" id="mm">--</div><div class="lbl">Minutos</div></div>
-              <div class="tbox"><div class="num" id="ss">--</div><div class="lbl">Segundos</div></div>
-            </div>
-
-            <div class="cta">
-              <a class="btn btn-primary" id="btn-whatsapp" href="#" target="_blank" rel="noopener">Confirmar asistencia</a>
-              <a class="btn btn-ghost" href="#ubicaciones">Ubicaciones</a>
-              <a class="btn btn-ghost" href="#regalos">Mesa de regalos</a>
-            </div>
-          </div>
-        </div>
+  <!-- Sticky top bar -->
+  <div class="topbar">
+    <div class="wrap in">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>XV Años</span>
       </div>
-    </header>
-
-    <!-- UBICACIONES -->
-    <section id="ubicaciones" class="section reveal">
-      <div class="section-head">
-        <h2 class="section-title">Ubicaciones</h2>
-        <div class="line"></div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-inner">
-          <div class="timeline">
-            <div class="event">
-              <div class="time">15:00<span>Misa</span></div>
-              <div>
-                <p class="info" style="margin:0">
-                  <strong>Parroquia de Nuestra Señora de la Paz</strong><br>
-                  Paseos de Churubusco
-                </p>
-                <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-                  <a class="btn btn-primary" href="https://maps.app.goo.gl/7fiqxCDvtAW4DVUB8" target="_blank" rel="noopener">Abrir misa</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="event" id="recepcion">
-              <div class="time">16:30<span>Recepción</span></div>
-              <div>
-                <p class="info" style="margin:0">
-                  <strong>Salón Grissel</strong><br>
-                  CDMX
-                </p>
-                <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-                  <a class="btn btn-primary" href="https://maps.app.goo.gl/Lnk4KmBMn2SB23AW8" target="_blank" rel="noopener">Abrir recepción</a>
-                  <a class="btn btn-ghost" href="#galeria">Ver galería</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="two-col" style="margin-top:14px;">
-            <div class="map">
-              <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps?q=Parroquia%20de%20Nuestra%20Se%C3%B1ora%20de%20la%20Paz%20Paseos%20de%20Churubusco&output=embed"></iframe>
-            </div>
-            <div class="map">
-              <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps?q=Sal%C3%B3n%20Grissel&output=embed"></iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- GALERÍA -->
-    <section id="galeria" class="section reveal">
-      <div class="section-head">
-        <h2 class="section-title">Galería</h2>
-        <div class="line"></div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-inner">
-          <p class="info">Toca una foto para verla en grande.</p>
-
-          <div class="grid" id="galleryGrid">
-            <div class="thumb"><img src="assets/gallery/01.jpg" alt="Foto 1" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/02.jpg" alt="Foto 2" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/03.jpg" alt="Foto 3" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/04.jpg" alt="Foto 4" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/05.jpg" alt="Foto 5" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/06.jpg" alt="Foto 6" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/07.jpg" alt="Foto 7" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/08.jpg" alt="Foto 8" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/09.jpg" alt="Foto 9" loading="lazy"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- REGALOS -->
-    <section id="regalos" class="section reveal">
-      <div class="section-head">
-        <h2 class="section-title">Mesa de regalos</h2>
-        <div class="line"></div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-inner">
-          <p class="info">Liverpool · Número: <strong>51947356</strong></p>
-          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn btn-primary" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51947356" target="_blank" rel="noopener">Abrir mesa</a>
-            <button class="btn btn-ghost" id="copyGift" type="button">Copiar número</button>
-          </div>
-          <p class="info" id="copyGiftHint" style="margin-top:10px;"></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONFIRMACIÓN -->
-    <section id="confirmacion" class="section reveal">
-      <div class="section-head">
-        <h2 class="section-title">Confirmación</h2>
-        <div class="line"></div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-inner">
-          <p class="info">Confirma tu asistencia por WhatsApp.</p>
-          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn btn-primary" id="btn-whatsapp-2" href="#" target="_blank" rel="noopener">Confirmar ahora</a>
-            <a class="btn btn-ghost" href="#inicio">Volver arriba</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="reveal">
-      <div>Invitación creada por <strong>Invytia MX</strong></div>
-      <div class="footer-logo">
-        <img src="assets/logo-invytia.png" alt="Invytia MX">
-      </div>
-    </footer>
-
-  </div>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lb-content">
-      <div class="lb-bar">
-        <div id="lbCounter">Foto</div>
-        <div style="display:flex; gap:10px; align-items:center;">
-          <button class="lb-btn" id="lbPrev" type="button">←</button>
-          <button class="lb-btn" id="lbNext" type="button">→</button>
-          <button class="lb-btn" id="lbClose" type="button">Cerrar ✕</button>
-        </div>
-      </div>
-      <div class="lb-img">
-        <img id="lbImg" src="" alt="Foto en grande">
-      </div>
+      <nav class="nav" aria-label="Secciones">
+        <a href="#inicio">Inicio</a>
+        <a href="#evento">Evento</a>
+        <a href="#galeria">Galería</a>
+        <a href="#regalos">Regalos</a>
+        <a href="#asistencia">Confirmar</a>
+      </nav>
     </div>
   </div>
 
-  <!-- Música -->
-  <div class="music-fab hidden" id="musicFab" role="button" aria-label="Música">
-    <span class="dot" aria-hidden="true"></span>
-    <span id="musicFabText">Música</span>
+  <main class="wrap">
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+      <div class="card heroCard">
+        <div class="watermark" aria-hidden="true"></div>
+
+        <p class="kicker">Estás invitado(a)</p>
+        <h1 class="name">Daira</h1>
+        <p class="subtitle">Mis XV Años • 28 de marzo de 2026</p>
+
+        <div class="pillRow" aria-label="Detalles rápidos">
+          <span class="pill">📍 Paseos de Churubusco</span>
+          <span class="pill">⏳ Cuenta regresiva</span>
+          <span class="pill">🎵 Música en la invitación</span>
+        </div>
+
+        <div class="countdown" aria-label="Cuenta regresiva">
+          <div class="cdBox"><div class="cdNum" id="cdDays">--</div><div class="cdLbl">Días</div></div>
+          <div class="cdBox"><div class="cdNum" id="cdHours">--</div><div class="cdLbl">Horas</div></div>
+          <div class="cdBox"><div class="cdNum" id="cdMins">--</div><div class="cdLbl">Min</div></div>
+          <div class="cdBox"><div class="cdNum" id="cdSecs">--</div><div class="cdLbl">Seg</div></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" id="musicBtn" type="button" aria-label="Reproducir o pausar música">
+            ▶︎ Reproducir música
+          </button>
+          <a class="btn" href="#evento">Ver ubicación</a>
+          <a class="btn" href="#asistencia">Confirmar asistencia</a>
+        </div>
+
+        <p class="note">
+          Si tu celular no reproduce automático, toca el botón de música para iniciar.
+        </p>
+
+        <!-- Audio: coloca tu archivo en /assets/song.mp3 -->
+        <audio id="bgMusic" preload="auto">
+          <source src="assets/song.mp3" type="audio/mpeg">
+          Tu navegador no soporta audio.
+        </audio>
+      </div>
+    </section>
+
+    <!-- EVENT DETAILS -->
+    <section id="evento">
+      <div class="card sectionCard">
+        <h2 class="h2">Detalles del evento</h2>
+        <div class="divider" aria-hidden="true"></div>
+        <p class="p">Acompáñanos a celebrar este día tan especial.</p>
+
+        <div class="eventGrid">
+          <!-- Misa -->
+          <div class="eventItem">
+            <div class="eventTitle">
+              <div>
+                <h3>Misa</h3>
+                <div class="eventMeta">
+                  <strong>Parroquia de Nuestra Señora de la Paz</strong><br/>
+                  Paseos de Churubusco
+                </div>
+              </div>
+              <div class="timeTag">15:00 hrs</div>
+            </div>
+
+            <div class="actions" style="justify-content:flex-start; margin-top:12px;">
+              <a class="btn" target="_blank" rel="noopener" href="https://maps.app.goo.gl/7fiqxCDvtAW4DVUB8">Abrir en Maps</a>
+            </div>
+
+            <div class="mapWrap" aria-label="Mapa misa">
+              <!-- Embed using coordinates (works reliably without needing Google Maps embed token) -->
+              <iframe
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=19.38481,-99.0857131&hl=es&z=17&output=embed"
+                title="Mapa: Parroquia de Nuestra Señora de la Paz">
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Recepción -->
+          <div class="eventItem">
+            <div class="eventTitle">
+              <div>
+                <h3>Recepción</h3>
+                <div class="eventMeta">
+                  <strong>Salón Grissel</strong><br/>
+                  Paseos de Churubusco
+                </div>
+              </div>
+              <div class="timeTag">16:30 hrs</div>
+            </div>
+
+            <div class="actions" style="justify-content:flex-start; margin-top:12px;">
+              <a class="btn" target="_blank" rel="noopener" href="https://maps.app.goo.gl/Lnk4KmBMn2SB23AW8">Abrir en Maps</a>
+            </div>
+
+            <div class="mapWrap" aria-label="Mapa recepción">
+              <iframe
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=19.3863889,-99.0869444&hl=es&z=17&output=embed"
+                title="Mapa: Salón Grissel">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="galeria">
+      <div class="card sectionCard">
+        <h2 class="h2">Galería</h2>
+        <div class="divider" aria-hidden="true"></div>
+        <p class="p">Momentos especiales 💗</p>
+        <p class="galleryHint">Toca o da click en una foto para verla en grande.</p>
+
+        <div class="grid" aria-label="Galería de 9 fotos">
+          <!-- Reemplaza las fotos en /assets/gallery/ -->
+          <div class="thumb" data-full="assets/gallery/01.jpg" aria-label="Abrir foto 1"><img src="assets/gallery/01.jpg" alt="Foto 1"></div>
+          <div class="thumb" data-full="assets/gallery/02.jpg" aria-label="Abrir foto 2"><img src="assets/gallery/02.jpg" alt="Foto 2"></div>
+          <div class="thumb" data-full="assets/gallery/03.jpg" aria-label="Abrir foto 3"><img src="assets/gallery/03.jpg" alt="Foto 3"></div>
+          <div class="thumb" data-full="assets/gallery/04.jpg" aria-label="Abrir foto 4"><img src="assets/gallery/04.jpg" alt="Foto 4"></div>
+          <div class="thumb" data-full="assets/gallery/05.jpg" aria-label="Abrir foto 5"><img src="assets/gallery/05.jpg" alt="Foto 5"></div>
+          <div class="thumb" data-full="assets/gallery/06.jpg" aria-label="Abrir foto 6"><img src="assets/gallery/06.jpg" alt="Foto 6"></div>
+          <div class="thumb" data-full="assets/gallery/07.jpg" aria-label="Abrir foto 7"><img src="assets/gallery/07.jpg" alt="Foto 7"></div>
+          <div class="thumb" data-full="assets/gallery/08.jpg" aria-label="Abrir foto 8"><img src="assets/gallery/08.jpg" alt="Foto 8"></div>
+          <div class="thumb" data-full="assets/gallery/09.jpg" aria-label="Abrir foto 9"><img src="assets/gallery/09.jpg" alt="Foto 9"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GIFTS -->
+    <section id="regalos">
+      <div class="card sectionCard">
+        <h2 class="h2">Mesa de regalos</h2>
+        <div class="divider" aria-hidden="true"></div>
+        <p class="p">Tu presencia es lo más importante. Si deseas hacer un obsequio, aquí está la opción:</p>
+
+        <div class="giftBox">
+          <div class="giftNumber" aria-label="Número de mesa">51947356</div>
+          <a class="btn primary" target="_blank" rel="noopener"
+             href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51947356">
+            Abrir mesa en Liverpool
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section id="asistencia">
+      <div class="card sectionCard">
+        <h2 class="h2">Confirmar asistencia</h2>
+        <div class="divider" aria-hidden="true"></div>
+        <p class="p">Ayúdanos confirmando tu asistencia por WhatsApp.</p>
+
+        <div class="actions" style="margin-top:14px;">
+          <a class="btn primary" id="waBtn" target="_blank" rel="noopener">
+            Confirmar por WhatsApp
+          </a>
+          <a class="btn" href="#inicio">Volver arriba</a>
+        </div>
+
+        <p class="note" style="margin-top:12px;">
+          Consejo: escribe cuántas personas asisten y tu nombre para registrarte.
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>Invitación creada por <strong>Invytia MX</strong></div>
+      <div class="invytia">
+        <!-- Coloca el logo en /assets/invytia-logo.png -->
+        <img src="assets/invytia-logo.png" alt="Invytia MX Logo">
+      </div>
+    </footer>
+  </main>
+
+  <!-- Lightbox modal -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-label="Visor de imagen">
+    <div class="modalInner">
+      <button class="closeBtn" id="closeModal" type="button" aria-label="Cerrar">✕</button>
+      <img class="modalImg" id="modalImg" alt="Foto ampliada">
+    </div>
   </div>
 
-  <audio id="audio" preload="auto">
-    <source src="assets/song.mp3" type="audio/mpeg" />
-  </audio>
-
   <script>
-    // Countdown termina a la misa: 28 marzo 2026 15:00
-    const EVENT_DATE = new Date(2026, 2, 28, 15, 0, 0);
-    const WHATSAPP_NUMBER = "525532327877";
-    const WHATSAPP_MESSAGE = "Hola, confirmo mi asistencia a los XV años de Daira Pérez Romero. Mi nombre es: _____. Asistiremos: ____ personas. ¡Gracias!";
+    // ========= Config =========
+    // Evento: 28 marzo 2026 (hora local CDMX). Ajusta hora si quieres.
+    const EVENT_ISO_LOCAL = "2026-03-28T15:00:00"; // empieza con misa 15:00
 
     // WhatsApp
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-    document.getElementById("btn-whatsapp").href = waUrl;
-    document.getElementById("btn-whatsapp-2").href = waUrl;
+    const WA_NUMBER = "525532327877";
+    const WA_TEXT = "Hola, quiero confirmar mi asistencia a los XV años de Daira. Mi nombre es: _____. Asistiremos: ____ persona(s).";
 
-    // Countdown
-    const dd = document.getElementById("dd");
-    const hh = document.getElementById("hh");
-    const mm = document.getElementById("mm");
-    const ss = document.getElementById("ss");
-    const pad = (n) => String(n).padStart(2,"0");
+    // ========= Helpers =========
+    const pad2 = (n) => String(n).padStart(2, "0");
 
-    function tick(){
+    // ========= Countdown =========
+    const cdDays  = document.getElementById("cdDays");
+    const cdHours = document.getElementById("cdHours");
+    const cdMins  = document.getElementById("cdMins");
+    const cdSecs  = document.getElementById("cdSecs");
+
+    // Interpret EVENT_ISO_LOCAL as local time (device local). Most guests will be in CDMX.
+    const eventDate = new Date(EVENT_ISO_LOCAL);
+
+    function tickCountdown(){
       const now = new Date();
-      const diff = EVENT_DATE - now;
-      if(diff <= 0){
-        dd.textContent="00"; hh.textContent="00"; mm.textContent="00"; ss.textContent="00";
+      let diff = eventDate.getTime() - now.getTime();
+
+      if (diff <= 0){
+        cdDays.textContent  = "00";
+        cdHours.textContent = "00";
+        cdMins.textContent  = "00";
+        cdSecs.textContent  = "00";
         return;
       }
-      const t = Math.floor(diff/1000);
-      const days = Math.floor(t/86400);
-      const hours = Math.floor((t%86400)/3600);
-      const mins = Math.floor((t%3600)/60);
-      const secs = t%60;
 
-      dd.textContent = String(days);
-      hh.textContent = pad(hours);
-      mm.textContent = pad(mins);
-      ss.textContent = pad(secs);
+      const sec = Math.floor(diff / 1000);
+      const days = Math.floor(sec / 86400);
+      const hours = Math.floor((sec % 86400) / 3600);
+      const mins = Math.floor((sec % 3600) / 60);
+      const secs = sec % 60;
+
+      cdDays.textContent  = pad2(days);
+      cdHours.textContent = pad2(hours);
+      cdMins.textContent  = pad2(mins);
+      cdSecs.textContent  = pad2(secs);
     }
-    tick(); setInterval(tick, 1000);
 
-    // Copy gift
-    const copyGiftBtn = document.getElementById("copyGift");
-    const copyGiftHint = document.getElementById("copyGiftHint");
-    copyGiftBtn.addEventListener("click", async () => {
+    tickCountdown();
+    setInterval(tickCountdown, 1000);
+
+    // ========= WhatsApp button =========
+    const waBtn = document.getElementById("waBtn");
+    const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_TEXT)}`;
+    waBtn.href = waUrl;
+
+    // ========= Music controls =========
+    const musicBtn = document.getElementById("musicBtn");
+    const bgMusic = document.getElementById("bgMusic");
+    let isPlaying = false;
+
+    async function toggleMusic(){
       try{
-        await navigator.clipboard.writeText("51947356");
-        copyGiftHint.textContent = "Copiado ✅";
-      }catch(e){
-        copyGiftHint.textContent = "51947356";
-      }
-    });
-
-    // Animaciones reveal
-    const revealEls = Array.from(document.querySelectorAll(".reveal"));
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add("in");
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el => io.observe(el));
-
-    // Galería lightbox
-    const grid = document.getElementById("galleryGrid");
-    const thumbs = Array.from(grid.querySelectorAll("img"));
-    const lightbox = document.getElementById("lightbox");
-    const lbImg = document.getElementById("lbImg");
-    const lbCounter = document.getElementById("lbCounter");
-    const lbClose = document.getElementById("lbClose");
-    const lbPrev = document.getElementById("lbPrev");
-    const lbNext = document.getElementById("lbNext");
-    let currentIndex = 0;
-
-    function openLightbox(index){
-      currentIndex = index;
-      lbImg.src = thumbs[currentIndex].src;
-      lbCounter.textContent = `Foto ${currentIndex+1} de ${thumbs.length}`;
-      lightbox.classList.add("open");
-      document.body.style.overflow="hidden";
-    }
-    function closeLightbox(){
-      lightbox.classList.remove("open");
-      document.body.style.overflow="";
-      lbImg.src="";
-    }
-    thumbs.forEach((img, idx) => {
-      img.addEventListener("click", () => openLightbox(idx));
-      img.parentElement.tabIndex = 0;
-      img.parentElement.setAttribute("role","button");
-    });
-    lbClose.addEventListener("click", closeLightbox);
-    lbPrev.addEventListener("click", () => {
-      currentIndex = (currentIndex - 1 + thumbs.length) % thumbs.length;
-      lbImg.src = thumbs[currentIndex].src;
-      lbCounter.textContent = `Foto ${currentIndex+1} de ${thumbs.length}`;
-    });
-    lbNext.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % thumbs.length;
-      lbImg.src = thumbs[currentIndex].src;
-      lbCounter.textContent = `Foto ${currentIndex+1} de ${thumbs.length}`;
-    });
-    lightbox.addEventListener("click", (e) => { if(e.target === lightbox) closeLightbox(); });
-    window.addEventListener("keydown", (e) => {
-      if(!lightbox.classList.contains("open")) return;
-      if(e.key === "Escape") closeLightbox();
-      if(e.key === "ArrowLeft") lbPrev.click();
-      if(e.key === "ArrowRight") lbNext.click();
-    });
-
-    // Música autoplay + fallback (con toggle premium)
-    const audio = document.getElementById("audio");
-    const musicFab = document.getElementById("musicFab");
-    const musicFabText = document.getElementById("musicFabText");
-    let playing = false;
-
-    function setFabLabel(){
-      musicFabText.textContent = playing ? "Pausar" : "Música";
-    }
-
-    async function tryAutoPlay(){
-      try{
-        audio.volume = 0.85;
-        await audio.play();
-        playing = true;
-        setFabLabel();
-        musicFab.classList.remove("hidden");
-      }catch(err){
-        // iOS/Chrome puede bloquear: mostramos el botón para activar
-        playing = false;
-        setFabLabel();
-        musicFab.classList.remove("hidden");
-      }
-    }
-
-    window.addEventListener("load", () => { tryAutoPlay(); });
-
-    musicFab.addEventListener("click", async () => {
-      try{
-        if(!playing){
-          await audio.play();
-          playing = true;
+        if (!isPlaying){
+          await bgMusic.play();
+          isPlaying = true;
+          musicBtn.textContent = "❚❚ Pausar música";
         }else{
-          audio.pause();
-          playing = false;
+          bgMusic.pause();
+          isPlaying = false;
+          musicBtn.textContent = "▶︎ Reproducir música";
         }
-        setFabLabel();
       }catch(e){
-        playing = false;
-        setFabLabel();
+        // If file missing or browser blocks autoplay
+        alert("No se pudo reproducir la música. Verifica que exista el archivo assets/song.mp3 y vuelve a intentarlo.");
       }
+    }
+    musicBtn.addEventListener("click", toggleMusic);
+
+    // ========= Gallery lightbox =========
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+    const closeModal = document.getElementById("closeModal");
+
+    function openModal(src){
+      modalImg.src = src;
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden","false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function hideModal(){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden","true");
+      modalImg.src = "";
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".thumb").forEach(el=>{
+      el.addEventListener("click", ()=> openModal(el.dataset.full));
+      el.addEventListener("keydown", (ev)=>{
+        if(ev.key === "Enter" || ev.key === " ") openModal(el.dataset.full);
+      });
+      el.setAttribute("tabindex","0");
+      el.setAttribute("role","button");
     });
 
-    document.addEventListener("click", () => {
-      if(audio.paused) tryAutoPlay();
-    }, { once:true });
+    closeModal.addEventListener("click", hideModal);
+    modal.addEventListener("click", (ev)=>{
+      if(ev.target === modal) hideModal();
+    });
+    window.addEventListener("keydown", (ev)=>{
+      if(ev.key === "Escape") hideModal();
+    });
   </script>
 </body>
 </html>
