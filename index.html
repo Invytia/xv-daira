@@ -31,16 +31,21 @@
       --radius-sm: 18px;
       --max: 1120px;
 
-      --glass: rgba(255,255,255,.72);
-      --glass-strong: rgba(255,255,255,.86);
-
       /* Ajuste del encuadre del HERO */
-      --heroY: 40%;
+      --heroY: 42%;
 
-      /* Franjas */
-      --band1: linear-gradient(90deg, rgba(251,246,244,1) 0%, rgba(243,215,212,.78) 36%, rgba(238,219,206,.72) 100%);
-      --band2: linear-gradient(90deg, rgba(238,219,206,.70) 0%, rgba(231,199,190,.74) 50%, rgba(251,246,244,1) 100%);
-      --band3: linear-gradient(90deg, rgba(243,215,212,.75) 0%, rgba(251,246,244,1) 45%, rgba(231,199,190,.68) 100%);
+      /* Fondos por sección */
+      --bgA: radial-gradient(1200px 760px at 16% 10%, rgba(243,215,212,.66), transparent 58%),
+             radial-gradient(900px 600px at 85% 22%, rgba(238,219,206,.56), transparent 55%),
+             linear-gradient(180deg, rgba(251,246,244,1) 0%, rgba(243,215,212,.10) 65%, rgba(251,246,244,1) 100%);
+
+      --bgB: radial-gradient(1200px 760px at 10% 30%, rgba(238,219,206,.70), transparent 58%),
+             radial-gradient(900px 600px at 90% 10%, rgba(231,199,190,.60), transparent 55%),
+             linear-gradient(180deg, rgba(251,246,244,1) 0%, rgba(238,219,206,.12) 70%, rgba(251,246,244,1) 100%);
+
+      --bgC: radial-gradient(1200px 760px at 30% 0%, rgba(231,199,190,.62), transparent 58%),
+             radial-gradient(900px 600px at 80% 60%, rgba(243,215,212,.52), transparent 55%),
+             linear-gradient(180deg, rgba(251,246,244,1) 0%, rgba(231,199,190,.10) 70%, rgba(251,246,244,1) 100%);
     }
 
     *{ box-sizing:border-box; }
@@ -49,10 +54,7 @@
     body{
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--ink);
-      background:
-        radial-gradient(1200px 760px at 16% 10%, rgba(243,215,212,.68), transparent 58%),
-        radial-gradient(900px 600px at 85% 22%, rgba(238,219,206,.60), transparent 55%),
-        linear-gradient(180deg, #fff 0%, rgba(243,215,212,.10) 60%, #fff 100%);
+      background: var(--bgA);
       overflow-x:hidden;
     }
     a{ color:inherit; text-decoration:none; }
@@ -76,7 +78,7 @@
       z-index:1;
     }
 
-    /* ===== Intro (sello) ===== */
+    /* ===== Intro ===== */
     .intro{
       position: fixed; inset: 0; z-index: 9999;
       display:grid; place-items:center;
@@ -424,35 +426,53 @@
     }
     .btn-ghost:hover{ transform: translateY(-1px); box-shadow: 0 14px 40px rgba(36,27,24,.10); }
 
-    /* ===== Franjas separadoras ===== */
-    .band{
-      width:100%;
+    /* ===== Secciones con transiciones premium ===== */
+    .stage{
+      position:relative;
       margin: 22px 0;
-      border-radius: 999px;
-      border: 1px solid rgba(36,27,24,.10);
-      box-shadow: 0 16px 48px rgba(36,27,24,.10);
+      border-radius: 48px;
       overflow:hidden;
-      position:relative;
+      border: 1px solid rgba(36,27,24,.10);
+      box-shadow: var(--shadow2);
+      background: rgba(255,255,255,.62);
     }
-    .band .in{
-      height: 56px;
-      background: var(--band1);
-      position:relative;
-    }
-    .band.alt .in{ background: var(--band2); }
-    .band.alt2 .in{ background: var(--band3); }
-    .band .in::after{
+    .stage::before{
       content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(120px 56px at 20% 50%, rgba(255,255,255,.44), transparent 60%),
-        radial-gradient(120px 56px at 80% 50%, rgba(255,255,255,.36), transparent 60%);
-      opacity:.55;
+      position:absolute; inset:-30%;
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.55), transparent 60%);
+      transform: rotate(14deg);
+      opacity:.26;
       pointer-events:none;
     }
+    .stage.bgA{ background: var(--bgA); }
+    .stage.bgB{ background: var(--bgB); }
+    .stage.bgC{ background: var(--bgC); }
 
-    /* Secciones */
-    .section{ margin-top: 18px; padding: 6px 0; }
+    .divider{
+      height: 120px;
+      position:relative;
+      background: linear-gradient(180deg, rgba(217,183,172,.36), rgba(243,215,212,.08));
+    }
+    .divider.alt{
+      background: linear-gradient(180deg, rgba(238,219,206,.40), rgba(251,246,244,.18));
+    }
+    .divider svg{
+      position:absolute;
+      left:0; right:0;
+      bottom:-1px;
+      width:100%;
+      height: 100%;
+    }
+
+    .section{
+      padding: 22px 22px 26px;
+      position:relative;
+    }
+    @media (max-width: 560px){
+      .section{ padding: 18px 16px 22px; }
+      .divider{ height: 98px; }
+    }
+
     .section-head{
       display:flex; align-items:baseline; justify-content:space-between;
       gap: 14px;
@@ -482,15 +502,22 @@
       position:relative;
     }
     .panel-inner{ padding: 18px; position:relative; }
+
     .info{
       margin:0;
       color: var(--muted);
       line-height: 1.75;
       font-size: 15px;
+      text-align:left;
     }
     .info strong{ color: rgba(36,27,24,.90); }
 
-    /* ===== Ubicaciones editorial: Foto + Info + Mapa juntos ===== */
+    /* Centrados para Mesa y Confirmación */
+    .centered .panel-inner{ padding: 24px 18px; text-align:center; }
+    .centered .info{ text-align:center; }
+    .centered .actions{ justify-content:center; }
+
+    /* ===== Ubicaciones ===== */
     .loc-grid{ display:grid; gap: 16px; }
 
     .loc-card{
@@ -546,7 +573,7 @@
 
     .loc-info{
       border-radius: 26px;
-      background: rgba(255,255,255,.70);
+      background: rgba(255,255,255,.74);
       border: 1px solid rgba(36,27,24,.10);
       padding: 16px 16px 14px;
       display:flex;
@@ -562,7 +589,7 @@
       flex: 0 0 auto;
       width: 112px;
       border-radius: 22px;
-      background: rgba(255,255,255,.86);
+      background: rgba(255,255,255,.90);
       border: 1px solid rgba(36,27,24,.10);
       text-align:center;
       padding: 12px 10px;
@@ -607,7 +634,7 @@
     }
     .map iframe{ width:100%; height:100%; border:0; display:block; }
 
-    /* ===== Separador Foto editorial ===== */
+    /* ===== Foto separador ===== */
     .photo-break{
       border-radius: 46px;
       overflow:hidden;
@@ -653,7 +680,7 @@
       color: rgba(36,27,24,.76);
     }
 
-    /* Galería */
+    /* ===== Galería ===== */
     .grid{
       margin-top: 14px;
       display:grid;
@@ -723,7 +750,7 @@
       cursor:pointer;
     }
 
-    /* Wishes */
+    /* ===== Buenos deseos (con texto + fondo 06) ===== */
     .wishes{ position:relative; overflow:hidden; }
     .wishes-bg{ position:absolute; inset:0; background:#111; }
     .wishes-bg img{
@@ -732,22 +759,21 @@
       object-position: 50% 28%;
       filter: blur(7px) contrast(1.02) saturate(1.02);
       transform: scale(1.12);
-      opacity:.54;
+      opacity:.56;
     }
     .wishes-bg::after{
       content:"";
       position:absolute; inset:0;
       background:
         radial-gradient(900px 520px at 50% 18%, rgba(231,199,190,.52), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
+        linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,.06));
     }
-
     .wishes-shell{ position:relative; padding: 18px; }
     .wishes-arc{
       width: min(860px, 100%);
       margin: 0 auto;
       border-radius: 999px 999px 34px 34px;
-      background: rgba(255,255,255,.20);
+      background: rgba(255,255,255,.22);
       border: 1px solid rgba(255,255,255,.18);
       backdrop-filter: blur(14px);
       box-shadow: 0 28px 110px rgba(0,0,0,.16);
@@ -761,7 +787,14 @@
       color: rgba(36,27,24,.94);
       letter-spacing:.2px;
     }
-    .tap{ display:flex; justify-content:center; opacity:.86; margin: 6px 0 14px; }
+    .w-sub{
+      margin: 0 auto 12px;
+      max-width: 540px;
+      color: rgba(36,27,24,.74);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .tap{ display:flex; justify-content:center; opacity:.86; margin: 6px 0 10px; }
 
     .form{
       width: min(860px, 100%);
@@ -915,212 +948,277 @@
       </div>
     </header>
 
-    <div class="band"><div class="in"></div></div>
-
-    <!-- UBICACIONES -->
-    <section id="ubicaciones" class="section reveal">
-      <div class="section-head">
-        <h2 class="section-title">Ubicaciones</h2>
-        <div class="line"></div>
+    <!-- ====== STAGE UBICACIONES ====== -->
+    <div class="stage bgB reveal" id="ubicaciones">
+      <div class="divider">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.92)" d="M0,96 C240,24 480,24 720,60 C960,96 1200,120 1440,84 L1440,120 L0,120 Z"></path>
+        </svg>
       </div>
 
-      <div class="panel">
-        <div class="panel-inner">
-          <div class="loc-grid">
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title">Ubicaciones</h2>
+          <div class="line"></div>
+        </div>
 
-            <!-- MISA -->
-            <div class="loc-card">
-              <div class="loc-layout">
-                <div class="loc-left">
-                  <div class="loc-photo">
-                    <img src="assets/misa.jpg" alt="Misa">
-                  </div>
-                  <div class="loc-info">
-                    <div class="loc-top">
-                      <div class="badge">
-                        <div class="t">15:00</div>
-                        <span class="s">MISA</span>
+        <div class="panel">
+          <div class="panel-inner">
+            <div class="loc-grid">
+
+              <!-- MISA -->
+              <div class="loc-card">
+                <div class="loc-layout">
+                  <div class="loc-left">
+                    <div class="loc-photo">
+                      <img src="assets/misa.jpg" alt="Misa">
+                    </div>
+                    <div class="loc-info">
+                      <div class="loc-top">
+                        <div class="badge">
+                          <div class="t">15:00</div>
+                          <span class="s">MISA</span>
+                        </div>
+                        <div class="loc-text">
+                          <h3>Parroquia de Nuestra Señora de la Paz</h3>
+                          <p>Paseos de Churubusco, CDMX</p>
+                        </div>
                       </div>
-                      <div class="loc-text">
-                        <h3>Parroquia de Nuestra Señora de la Paz</h3>
-                        <p>Paseos de Churubusco, CDMX</p>
+                      <div class="loc-actions">
+                        <a class="btn btn-primary" href="https://maps.app.goo.gl/7fiqxCDvtAW4DVUB8" target="_blank" rel="noopener">Abrir misa</a>
                       </div>
                     </div>
-                    <div class="loc-actions">
-                      <a class="btn btn-primary" href="https://maps.app.goo.gl/7fiqxCDvtAW4DVUB8" target="_blank" rel="noopener">Abrir misa</a>
-                    </div>
+                  </div>
+
+                  <div class="map">
+                    <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                      src="https://www.google.com/maps?q=Parroquia%20de%20Nuestra%20Se%C3%B1ora%20de%20la%20Paz%20Paseos%20de%20Churubusco%20CDMX&output=embed"></iframe>
                   </div>
                 </div>
+              </div>
 
-                <div class="map">
-                  <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps?q=Parroquia%20de%20Nuestra%20Se%C3%B1ora%20de%20la%20Paz%20Paseos%20de%20Churubusco%20CDMX&output=embed"></iframe>
+              <!-- RECEPCIÓN -->
+              <div class="loc-card">
+                <div class="loc-layout">
+                  <div class="loc-left">
+                    <div class="loc-photo">
+                      <img src="assets/salon.jpg" alt="Recepción">
+                    </div>
+                    <div class="loc-info">
+                      <div class="loc-top">
+                        <div class="badge">
+                          <div class="t">16:30</div>
+                          <span class="s">RECEPCIÓN</span>
+                        </div>
+                        <div class="loc-text">
+                          <h3>Salón Grissel</h3>
+                          <p>Paseos de Churubusco, CDMX</p>
+                        </div>
+                      </div>
+                      <div class="loc-actions">
+                        <a class="btn btn-primary" href="https://maps.app.goo.gl/Lnk4KmBMn2SB23AW8" target="_blank" rel="noopener">Abrir recepción</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="map">
+                    <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                      src="https://www.google.com/maps?q=Sal%C3%B3n%20Grissel%20Paseos%20de%20Churubusco%20CDMX&output=embed"></iframe>
+                  </div>
                 </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="photo-break">
+          <img src="assets/01.jpg" alt="Daira">
+          <div class="photo-caption">Un día para recordar</div>
+        </div>
+
+      </section>
+
+      <div class="divider alt">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.95)" d="M0,36 C240,90 480,96 720,66 C960,36 1200,18 1440,48 L1440,0 L0,0 Z"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- ====== STAGE REGALOS (CENTRADO) ====== -->
+    <div class="stage bgA reveal" id="regalos">
+      <div class="divider">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.92)" d="M0,96 C240,24 480,24 720,60 C960,96 1200,120 1440,84 L1440,120 L0,120 Z"></path>
+        </svg>
+      </div>
+
+      <section class="section centered">
+        <div class="section-head">
+          <h2 class="section-title">Mesa de regalos</h2>
+          <div class="line"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-inner">
+            <p class="info">
+              <strong>Tu presencia es lo más importante para nosotros.</strong><br>
+              Pero si además quieres hacerme un regalo, te comparto el link y número de mi mesa de regalos en Liverpool.
+            </p>
+
+            <div style="margin-top:16px; font-family:'Cormorant Garamond',serif; font-size:34px; font-weight:700; color:rgba(36,27,24,.92);">
+              51947356
+            </div>
+            <div style="margin-top:6px; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(36,27,24,.58);">
+              Número de mesa
+            </div>
+
+            <div class="actions" style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn btn-primary" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51947356" target="_blank" rel="noopener">Ir a Liverpool</a>
+              <button class="btn btn-ghost" id="copyGift" type="button">Copiar número</button>
+            </div>
+
+            <p class="info" id="copyGiftHint" style="margin-top:12px;"></p>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider alt">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.95)" d="M0,36 C240,90 480,96 720,66 C960,36 1200,18 1440,48 L1440,0 L0,0 Z"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- ====== STAGE GALERÍA ====== -->
+    <div class="stage bgC reveal" id="galeria">
+      <div class="divider">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.92)" d="M0,96 C240,24 480,24 720,60 C960,96 1200,120 1440,84 L1440,120 L0,120 Z"></path>
+        </svg>
+      </div>
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title">Galería</h2>
+          <div class="line"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-inner">
+            <p class="info" style="text-align:center;">Toca una foto para verla en grande.</p>
+
+            <div class="grid" id="galleryGrid">
+              <div class="thumb"><img src="assets/gallery/01.jpg" alt="Foto 1" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/02.jpg" alt="Foto 2" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/03.jpg" alt="Foto 3" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/04.jpg" alt="Foto 4" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/05.jpg" alt="Foto 5" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/06.jpg" alt="Foto 6" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/07.jpg" alt="Foto 7" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/08.jpg" alt="Foto 8" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/09.jpg" alt="Foto 9" loading="lazy"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider alt">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.95)" d="M0,36 C240,90 480,96 720,66 C960,36 1200,18 1440,48 L1440,0 L0,0 Z"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- ====== STAGE BUENOS DESEOS (FONDO 06) ====== -->
+    <div class="stage bgB reveal" id="buenosdeseos">
+      <div class="divider">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.92)" d="M0,96 C240,24 480,24 720,60 C960,96 1200,120 1440,84 L1440,120 L0,120 Z"></path>
+        </svg>
+      </div>
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title">Buenos deseos</h2>
+          <div class="line"></div>
+        </div>
+
+        <div class="panel wishes">
+          <div class="wishes-bg">
+            <!-- 🔁 Si tu foto está en assets/06.jpg, cambia la ruta aquí -->
+            <img src="assets/gallery/06.jpg" alt="">
+          </div>
+
+          <div class="wishes-shell">
+            <div class="wishes-arc">
+              <div class="w-title">Buenos deseos</div>
+              <p class="w-sub">Regálanos unas palabras y tu nombre para Daira, nuestra festejada.</p>
+
+              <div class="tap" aria-hidden="true">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 11V7a1 1 0 0 1 2 0v4" stroke="rgba(36,27,24,.80)" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M10 11V6a1 1 0 0 1 2 0v5" stroke="rgba(36,27,24,.80)" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M12 11V7a1 1 0 0 1 2 0v4" stroke="rgba(36,27,24,.80)" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M14 11V8a1 1 0 0 1 2 0v6c0 2-1.5 4-4 4h-1.5c-1.4 0-2.7-.6-3.6-1.7L5 14.5" stroke="rgba(36,27,24,.80)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </div>
             </div>
 
-            <!-- RECEPCIÓN -->
-            <div class="loc-card">
-              <div class="loc-layout">
-                <div class="loc-left">
-                  <div class="loc-photo">
-                    <img src="assets/salon.jpg" alt="Recepción">
-                  </div>
-                  <div class="loc-info">
-                    <div class="loc-top">
-                      <div class="badge">
-                        <div class="t">16:30</div>
-                        <span class="s">RECEPCIÓN</span>
-                      </div>
-                      <div class="loc-text">
-                        <h3>Salón Grissel</h3>
-                        <p>Paseos de Churubusco, CDMX</p>
-                      </div>
-                    </div>
-                    <div class="loc-actions">
-                      <a class="btn btn-primary" href="https://maps.app.goo.gl/Lnk4KmBMn2SB23AW8" target="_blank" rel="noopener">Abrir recepción</a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="map">
-                  <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps?q=Sal%C3%B3n%20Grissel%20Paseos%20de%20Churubusco%20CDMX&output=embed"></iframe>
-                </div>
+            <form class="form" id="wishesForm" autocomplete="off">
+              <input class="field" name="name" id="wName" placeholder="Nombre" required />
+              <textarea class="field" name="message" id="wMsg" placeholder="Mensaje o comentario" required></textarea>
+              <div class="send-row">
+                <button class="btn btn-primary send" id="wSend" type="submit">Enviar</button>
               </div>
-            </div>
+            </form>
 
+            <div class="w-note" id="wNote"></div>
           </div>
         </div>
+      </section>
+
+      <div class="divider alt">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.95)" d="M0,36 C240,90 480,96 720,66 C960,36 1200,18 1440,48 L1440,0 L0,0 Z"></path>
+        </svg>
       </div>
-    </section>
+    </div>
 
-    <!-- FOTO SEPARADOR (Daira) -->
-    <div class="band alt"><div class="in"></div></div>
-
-    <section class="section reveal" aria-label="Foto separadora">
-      <div class="photo-break">
-        <img src="assets/01.jpg" alt="Daira">
-        <div class="photo-caption">Un día para recordar</div>
-      </div>
-    </section>
-
-    <div class="band alt2"><div class="in"></div></div>
-
-    <!-- REGALOS -->
-    <section id="regalos" class="section reveal">
-      <div class="section-head">
-        <h2 class="section-title">Mesa de regalos</h2>
-        <div class="line"></div>
+    <!-- ====== STAGE CONFIRMACIÓN (CENTRADO) ====== -->
+    <div class="stage bgA reveal" id="confirmacion">
+      <div class="divider">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.92)" d="M0,96 C240,24 480,24 720,60 C960,96 1200,120 1440,84 L1440,120 L0,120 Z"></path>
+        </svg>
       </div>
 
-      <div class="panel">
-        <div class="panel-inner">
-          <p class="info">
-            <strong>Tu presencia es lo más importante para nosotros.</strong><br>
-            Pero si además quieres hacerme un regalo, te comparto el link y número de mi mesa de regalos en Liverpool.
-          </p>
-
-          <div style="margin-top:12px;">
-            <p class="info">Número: <strong>51947356</strong></p>
-          </div>
-
-          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn btn-primary" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51947356" target="_blank" rel="noopener">Abrir mesa</a>
-            <button class="btn btn-ghost" id="copyGift" type="button">Copiar número</button>
-          </div>
-          <p class="info" id="copyGiftHint" style="margin-top:10px;"></p>
-        </div>
-      </div>
-    </section>
-
-    <div class="band"><div class="in"></div></div>
-
-    <!-- GALERÍA -->
-    <section id="galeria" class="section reveal">
-      <div class="section-head">
-        <h2 class="section-title">Galería</h2>
-        <div class="line"></div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-inner">
-          <p class="info">Toca una foto para verla en grande.</p>
-
-          <div class="grid" id="galleryGrid">
-            <div class="thumb"><img src="assets/gallery/01.jpg" alt="Foto 1" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/02.jpg" alt="Foto 2" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/03.jpg" alt="Foto 3" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/04.jpg" alt="Foto 4" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/05.jpg" alt="Foto 5" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/06.jpg" alt="Foto 6" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/07.jpg" alt="Foto 7" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/08.jpg" alt="Foto 8" loading="lazy"></div>
-            <div class="thumb"><img src="assets/gallery/09.jpg" alt="Foto 9" loading="lazy"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="band alt"><div class="in"></div></div>
-
-    <!-- BUENOS DESEOS -->
-    <section id="buenosdeseos" class="section reveal">
-      <div class="section-head">
-        <h2 class="section-title">Buenos deseos</h2>
-        <div class="line"></div>
-      </div>
-
-      <div class="panel wishes">
-        <div class="wishes-bg">
-          <img src="assets/01.jpg" alt="">
+      <section class="section centered">
+        <div class="section-head">
+          <h2 class="section-title">Confirmación</h2>
+          <div class="line"></div>
         </div>
 
-        <div class="wishes-shell">
-          <div class="wishes-arc">
-            <div class="w-title">Buenos deseos</div>
-            <div class="tap" aria-hidden="true">
-              <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
-                <path d="M8 11V7a1 1 0 0 1 2 0v4" stroke="rgba(36,27,24,.80)" stroke-width="1.4" stroke-linecap="round"/>
-                <path d="M10 11V6a1 1 0 0 1 2 0v5" stroke="rgba(36,27,24,.80)" stroke-width="1.4" stroke-linecap="round"/>
-                <path d="M12 11V7a1 1 0 0 1 2 0v4" stroke="rgba(36,27,24,.80)" stroke-width="1.4" stroke-linecap="round"/>
-                <path d="M14 11V8a1 1 0 0 1 2 0v6c0 2-1.5 4-4 4h-1.5c-1.4 0-2.7-.6-3.6-1.7L5 14.5" stroke="rgba(36,27,24,.80)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+        <div class="panel">
+          <div class="panel-inner">
+            <p class="info">Confirma tu asistencia por WhatsApp.</p>
+            <div class="actions" style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn btn-primary" id="btn-whatsapp-2" href="#" target="_blank" rel="noopener">Confirmar ahora</a>
+              <a class="btn btn-ghost" href="#inicio">Volver arriba</a>
             </div>
           </div>
-
-          <form class="form" id="wishesForm" autocomplete="off">
-            <input class="field" name="name" id="wName" placeholder="Nombre" required />
-            <textarea class="field" name="message" id="wMsg" placeholder="Mensaje o comentario" required></textarea>
-            <div class="send-row">
-              <button class="btn btn-primary send" id="wSend" type="submit">Enviar</button>
-            </div>
-          </form>
-
-          <div class="w-note" id="wNote"></div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <div class="band alt2"><div class="in"></div></div>
-
-    <!-- CONFIRMACIÓN -->
-    <section id="confirmacion" class="section reveal">
-      <div class="section-head">
-        <h2 class="section-title">Confirmación</h2>
-        <div class="line"></div>
+      <div class="divider alt">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.95)" d="M0,36 C240,90 480,96 720,66 C960,36 1200,18 1440,48 L1440,0 L0,0 Z"></path>
+        </svg>
       </div>
-
-      <div class="panel">
-        <div class="panel-inner">
-          <p class="info">Confirma tu asistencia por WhatsApp.</p>
-          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn btn-primary" id="btn-whatsapp-2" href="#" target="_blank" rel="noopener">Confirmar ahora</a>
-            <a class="btn btn-ghost" href="#inicio">Volver arriba</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
 
     <footer class="reveal">
       <div>Invitación creada por <strong>Invytia MX</strong></div>
@@ -1342,11 +1440,7 @@
         const res = await fetch(WISHES_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name,
-            message,
-            userAgent: navigator.userAgent
-          })
+          body: JSON.stringify({ name, message, userAgent: navigator.userAgent })
         });
 
         const data = await res.json().catch(() => ({}));
