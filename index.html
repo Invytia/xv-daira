@@ -21,15 +21,15 @@
       --text:#241515;
       --muted: rgba(36,21,21,.70);
 
-      --bg: radial-gradient(1200px 700px at 25% 10%, rgba(243,215,212,.55), transparent 55%),
-            radial-gradient(900px 600px at 85% 20%, rgba(238,219,206,.55), transparent 55%),
-            linear-gradient(180deg, #fff 0%, rgba(243,215,212,.22) 55%, #fff 100%);
+      --border: rgba(112,44,43,.16);
+      --shadow: 0 26px 90px rgba(112,44,43,.14);
 
-      --radius: 26px;
+      --radius: 28px;
       --radius-sm: 18px;
-      --border: rgba(112,44,43,.14);
-      --shadow: 0 22px 70px rgba(112,44,43,.14);
-      --max: 1020px;
+      --max: 1040px;
+
+      --glass: rgba(255,255,255,.80);
+      --glass-strong: rgba(255,255,255,.86);
     }
 
     *{ box-sizing:border-box; }
@@ -37,24 +37,39 @@
     body{
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
-      background: var(--bg);
+      background:
+        radial-gradient(1200px 760px at 20% 10%, rgba(243,215,212,.65), transparent 55%),
+        radial-gradient(900px 600px at 85% 20%, rgba(238,219,206,.65), transparent 55%),
+        linear-gradient(180deg, #fff 0%, rgba(243,215,212,.18) 60%, #fff 100%);
       overflow-x:hidden;
     }
     a{ color:inherit; text-decoration:none; }
-
     .wrap{ max-width: var(--max); margin:0 auto; padding: 18px; }
 
-    /* ===== HERO full-screen premium ===== */
+    /* ===== Grain premium (sutil) ===== */
+    .grain{
+      pointer-events:none;
+      position: fixed;
+      inset: -40%;
+      opacity: .07;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      transform: rotate(6deg);
+    }
+
+    /* ===== HERO ===== */
     .hero{
       min-height: 92vh;
       display:grid;
       place-items:center;
-      padding: 14px 0 8px;
+      padding: 14px 0 10px;
+      position:relative;
+      z-index: 1;
     }
 
     .hero-frame{
       width:100%;
-      border-radius: clamp(18px, 3vw, 36px);
+      border-radius: clamp(18px, 3vw, 40px);
       overflow:hidden;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
@@ -62,52 +77,77 @@
       position:relative;
     }
 
+    /* “borde interior” premium */
+    .hero-frame::before{
+      content:"";
+      position:absolute; inset: 12px;
+      border-radius: clamp(14px, 2.4vw, 34px);
+      border: 1px solid rgba(255,255,255,.38);
+      box-shadow: inset 0 0 0 1px rgba(112,44,43,.12);
+      pointer-events:none;
+      z-index: 3;
+    }
+
     .hero-cover{
       position:relative;
       height: 92vh;
-      min-height: 660px;
+      min-height: 700px;
       background: #f7f1f0;
+      overflow:hidden;
+    }
+    @media (max-width: 560px){
+      .hero-cover{ min-height: 760px; }
     }
 
     .hero-cover img{
       width:100%;
       height:100%;
       object-fit: cover;
-      object-position: 50% 25%;
+      object-position: 50% 22%;
       display:block;
-      transform: scale(1.02);
-      filter: contrast(1.02) saturate(1.02);
+
+      /* Ken Burns super sutil */
+      transform: scale(1.06);
+      animation: kenburns 16s ease-in-out infinite alternate;
+      filter: contrast(1.03) saturate(1.03);
+    }
+    @keyframes kenburns{
+      from { transform: scale(1.06) translateY(0px); }
+      to   { transform: scale(1.10) translateY(-8px); }
     }
 
-    /* overlay editorial */
+    /* Vignette + tono editorial */
     .hero-cover::after{
       content:"";
       position:absolute; inset:0;
       background:
-        radial-gradient(900px 420px at 60% 20%, rgba(243,215,212,.36), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.06) 28%, rgba(0,0,0,.18) 70%, rgba(0,0,0,.34) 100%);
+        radial-gradient(900px 480px at 55% 18%, rgba(243,215,212,.38), transparent 62%),
+        radial-gradient(900px 520px at 50% 110%, rgba(0,0,0,.52), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.14) 0%, rgba(0,0,0,.08) 36%, rgba(0,0,0,.18) 72%, rgba(0,0,0,.36) 100%);
       pointer-events:none;
+      z-index: 2;
     }
 
-    /* panel texto sobre la foto (como referencia) */
+    /* Panel glass */
     .hero-panel{
       position:absolute;
       left: 50%;
-      bottom: clamp(18px, 4vw, 36px);
+      bottom: clamp(18px, 4vw, 38px);
       transform: translateX(-50%);
-      width: min(780px, calc(100% - 26px));
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,.25);
-      background: rgba(255,255,255,.82);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 18px 60px rgba(0,0,0,.18);
-      padding: clamp(18px, 3.2vw, 28px);
+      width: min(820px, calc(100% - 26px));
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.28);
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 22px 70px rgba(0,0,0,.22);
+      padding: clamp(18px, 3.4vw, 30px);
+      z-index: 4;
     }
 
     .kicker{
       display:flex; align-items:center; justify-content:center; gap:10px;
       font-size: 12px;
-      letter-spacing: .22em;
+      letter-spacing: .26em;
       text-transform: uppercase;
       color: rgba(36,21,21,.65);
       margin-bottom: 10px;
@@ -115,7 +155,7 @@
     .kdot{
       width:10px; height:10px; border-radius:999px;
       background: var(--rose);
-      box-shadow: 0 0 0 8px rgba(197,102,105,.14);
+      box-shadow: 0 0 0 9px rgba(197,102,105,.14);
     }
 
     .title{
@@ -124,84 +164,129 @@
       color: var(--wine);
       text-align:center;
       margin:0;
-      font-size: clamp(42px, 6vw, 72px);
-      line-height: .92;
+      font-size: clamp(44px, 6.2vw, 76px);
+      line-height: .90;
       letter-spacing: .2px;
     }
+
+    .orn{
+      display:flex; justify-content:center;
+      margin: 10px 0 8px;
+      opacity: .92;
+    }
+    .orn svg{ width: 220px; max-width: 56vw; }
+    .orn path{ stroke: rgba(112,44,43,.55); }
+
     .sub{
       text-align:center;
-      margin: 10px 0 0;
+      margin: 0;
       color: var(--muted);
       line-height: 1.7;
       font-size: 15px;
     }
     .sub strong{ color: rgba(36,21,21,.88); }
 
-    .cta{
-      display:flex; flex-wrap:wrap; gap:10px;
-      justify-content:center;
-      margin-top: 16px;
-    }
-
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding: 12px 16px;
-      border-radius: 999px;
-      font-weight: 650;
-      font-size: 14px;
-      user-select:none;
-      border: 1px solid transparent;
-      transition: transform .08s ease, filter .12s ease;
-    }
-    .btn:active{ transform: translateY(1px); }
-    .btn-primary{
-      background: var(--wine);
-      color:#fff;
-      box-shadow: 0 12px 28px rgba(112,44,43,.22);
-    }
-    .btn-ghost{
-      background: rgba(255,255,255,.72);
-      border-color: rgba(112,44,43,.16);
-      color: var(--wine);
-    }
-
-    /* countdown minimal */
+    /* Countdown premium */
     .countdown{
-      margin-top: 14px;
+      margin-top: 16px;
       display:grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
     }
     .tbox{
-      background: rgba(243,215,212,.40);
-      border: 1px solid rgba(112,44,43,.12);
       border-radius: 18px;
+      background: rgba(243,215,212,.34);
+      border: 1px solid rgba(112,44,43,.12);
       padding: 12px 10px;
       text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    /* highlight suave */
+    .tbox::before{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), transparent 60%);
+      transform: rotate(18deg);
+      opacity: .35;
+      pointer-events:none;
     }
     .num{
       font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
-      font-size: clamp(22px, 3.2vw, 32px);
+      font-size: clamp(22px, 3.2vw, 34px);
       font-weight: 700;
       color: var(--wine);
       line-height: 1;
+      position:relative;
     }
     .lbl{
       margin-top: 6px;
       font-size: 11px;
-      letter-spacing: .16em;
+      letter-spacing: .18em;
       text-transform: uppercase;
       color: rgba(36,21,21,.58);
+      position:relative;
     }
     @media (max-width: 560px){
       .countdown{ grid-template-columns: repeat(2, 1fr); }
-      .hero-cover{ min-height: 720px; }
     }
 
-    /* ===== Secciones (editorial, menos “tarjetas repetidas”) ===== */
+    /* Botones premium */
+    .cta{
+      display:flex; flex-wrap:wrap; gap:10px;
+      justify-content:center;
+      margin-top: 16px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 650;
+      font-size: 14px;
+      border: 1px solid transparent;
+      transition: transform .10s ease, filter .18s ease, background .18s ease;
+      user-select:none;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn-primary{
+      color:#fff;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0)),
+        linear-gradient(180deg, #7a3231, #5f2322);
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 14px 30px rgba(112,44,43,.24);
+      position:relative;
+      overflow:hidden;
+    }
+    /* shimmer premium */
+    .btn-primary::after{
+      content:"";
+      position:absolute;
+      top:-40%; left:-40%;
+      width: 60%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.30), transparent);
+      transform: rotate(18deg) translateX(-140%);
+      transition: transform .9s ease;
+      opacity: .55;
+    }
+    .btn-primary:hover::after{
+      transform: rotate(18deg) translateX(260%);
+    }
+
+    .btn-ghost{
+      background: rgba(255,255,255,.72);
+      border-color: rgba(112,44,43,.16);
+      color: var(--wine);
+    }
+    .btn:hover{ filter: brightness(1.02); }
+
+    /* ===== Secciones ===== */
     .section{
       margin-top: 18px;
-      padding: 4px 0;
+      padding: 6px 0;
+      position:relative;
+      z-index: 1;
     }
     .section-head{
       display:flex; align-items:baseline; justify-content:space-between;
@@ -210,7 +295,7 @@
     }
     .section-title{
       font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
-      font-size: 34px;
+      font-size: 36px;
       font-weight: 700;
       color: var(--wine);
       margin:0;
@@ -219,7 +304,7 @@
     .line{
       height:1px;
       flex: 1;
-      background: linear-gradient(90deg, rgba(112,44,43,.20), rgba(112,44,43,0));
+      background: linear-gradient(90deg, rgba(112,44,43,.24), rgba(112,44,43,0));
       border-radius:999px;
       margin-top: 18px;
     }
@@ -230,8 +315,19 @@
       background: rgba(255,255,255,.78);
       box-shadow: var(--shadow);
       overflow:hidden;
+      position:relative;
     }
-    .panel-inner{ padding: 18px; }
+    /* “tinta” suave para profundidad */
+    .panel::before{
+      content:"";
+      position:absolute; inset:-120px -120px auto auto;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle at 30% 30%, rgba(197,102,105,.18), transparent 62%);
+      transform: rotate(20deg);
+      pointer-events:none;
+      opacity:.6;
+    }
+    .panel-inner{ padding: 18px; position:relative; }
 
     .two-col{
       display:grid;
@@ -251,18 +347,53 @@
     }
     .info strong{ color: rgba(36,21,21,.88); }
 
+    /* Timeline (se ve premium vs texto plano) */
+    .timeline{
+      margin-top: 12px;
+      display:grid;
+      gap: 10px;
+    }
+    .event{
+      border-radius: 20px;
+      border: 1px solid rgba(112,44,43,.12);
+      background: rgba(243,215,212,.26);
+      padding: 14px;
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .time{
+      flex: 0 0 auto;
+      width: 84px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(112,44,43,.12);
+      text-align:center;
+      padding: 10px 8px;
+      color: var(--wine);
+      font-weight: 800;
+    }
+    .time span{
+      display:block;
+      font-size: 11px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      opacity:.7;
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
     .map{
       width:100%;
       height: 340px;
       border: 1px solid rgba(112,44,43,.12);
-      border-radius: 20px;
+      border-radius: 22px;
       overflow:hidden;
       background: rgba(238,219,206,.25);
     }
     .map iframe{ width:100%; height:100%; border:0; }
 
     /* Galería */
-    .hint{ margin: 10px 0 0; color: rgba(36,21,21,.62); font-size: 14px; }
     .grid{
       margin-top: 14px;
       display:grid;
@@ -271,20 +402,31 @@
     }
     @media (max-width: 560px){ .grid{ gap: 8px; } }
     .thumb{
-      border-radius: 18px;
+      border-radius: 20px;
       overflow:hidden;
       border: 1px solid rgba(112,44,43,.12);
       background: rgba(238,219,206,.18);
       cursor:pointer;
       aspect-ratio: 1/1;
+      position:relative;
     }
     .thumb img{
       width:100%; height:100%;
       object-fit: cover;
       display:block;
-      transition: transform .18s ease;
+      transition: transform .22s ease, filter .22s ease;
     }
-    .thumb:hover img{ transform: scale(1.02); }
+    .thumb::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.40), transparent 60%),
+                  linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.10));
+      opacity: .0;
+      transition: opacity .22s ease;
+      pointer-events:none;
+    }
+    .thumb:hover img{ transform: scale(1.03); filter: contrast(1.02); }
+    .thumb:hover::after{ opacity: .35; }
 
     /* Lightbox */
     .lightbox{
@@ -327,21 +469,27 @@
       cursor:pointer;
     }
 
-    /* Footer */
     footer{
       margin: 22px 0 30px;
       text-align:center;
       color: rgba(36,21,21,.62);
       font-size: 13px;
+      position:relative;
+      z-index: 1;
     }
     .footer-logo{ margin-top: 10px; display:flex; justify-content:center; }
     .footer-logo img{ height: 34px; width:auto; opacity:.92; filter: drop-shadow(0 8px 22px rgba(112,44,43,.12)); }
 
-    /* Animaciones suaves */
-    .reveal{ opacity:0; transform: translateY(14px); transition: opacity .75s ease, transform .75s ease; }
-    .reveal.in{ opacity:1; transform: translateY(0); }
+    /* Animaciones */
+    .reveal{
+      opacity:0;
+      transform: translateY(18px);
+      filter: blur(6px);
+      transition: opacity .85s ease, transform .85s ease, filter .85s ease;
+    }
+    .reveal.in{ opacity:1; transform: translateY(0); filter: blur(0); }
 
-    /* Música floating */
+    /* Música premium */
     .music-fab{
       position: fixed;
       right: 14px;
@@ -354,7 +502,7 @@
       border: 1px solid rgba(112,44,43,.16);
       box-shadow: 0 14px 30px rgba(112,44,43,.18);
       color: var(--wine);
-      font-weight: 700;
+      font-weight: 800;
       font-size: 13px;
       cursor:pointer;
       user-select:none;
@@ -363,13 +511,15 @@
     .music-fab .dot{
       width: 10px; height: 10px; border-radius: 999px;
       background: var(--rose);
-      box-shadow: 0 0 0 8px rgba(197,102,105,.14);
+      box-shadow: 0 0 0 9px rgba(197,102,105,.14);
     }
     .music-fab.hidden{ display:none; }
   </style>
 </head>
 
 <body>
+  <div class="grain" aria-hidden="true"></div>
+
   <div class="wrap">
 
     <!-- HERO -->
@@ -380,7 +530,17 @@
 
           <div class="hero-panel">
             <div class="kicker"><span class="kdot"></span> 28 de marzo 2026 · CDMX</div>
+
             <h1 class="title">Mis XV Años, Daira</h1>
+
+            <div class="orn" aria-hidden="true">
+              <svg viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 20H120" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M180 20H290" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M150 10C145 14 140 16 135 20C140 24 145 26 150 30C155 26 160 24 165 20C160 16 155 14 150 10Z" stroke-width="1.5" stroke-linejoin="round"/>
+              </svg>
+            </div>
+
             <p class="sub">
               <strong>Daira Pérez Romero</strong><br>
               Misa <strong>15:00 hrs</strong> · Recepción <strong>16:30 hrs</strong>
@@ -395,7 +555,7 @@
 
             <div class="cta">
               <a class="btn btn-primary" id="btn-whatsapp" href="#" target="_blank" rel="noopener">Confirmar asistencia</a>
-              <a class="btn btn-ghost" href="#ubicaciones">Ver ubicaciones</a>
+              <a class="btn btn-ghost" href="#ubicaciones">Ubicaciones</a>
               <a class="btn btn-ghost" href="#regalos">Mesa de regalos</a>
             </div>
           </div>
@@ -412,43 +572,43 @@
 
       <div class="panel">
         <div class="panel-inner">
-          <div class="two-col">
-            <div>
-              <p class="info">
-                <strong>Misa · 15:00 hrs</strong><br>
-                PARROQUIA DE NUESTRA SEÑORA DE LA PAZ, PASEOS DE CHURUBUSCO
-              </p>
-              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-                <a class="btn btn-primary" href="https://maps.app.goo.gl/7fiqxCDvtAW4DVUB8" target="_blank" rel="noopener">Abrir misa</a>
-                <a class="btn btn-ghost" href="#recepcion">Ir a recepción</a>
+          <div class="timeline">
+            <div class="event">
+              <div class="time">15:00<span>Misa</span></div>
+              <div>
+                <p class="info" style="margin:0">
+                  <strong>Parroquia de Nuestra Señora de la Paz</strong><br>
+                  Paseos de Churubusco
+                </p>
+                <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+                  <a class="btn btn-primary" href="https://maps.app.goo.gl/7fiqxCDvtAW4DVUB8" target="_blank" rel="noopener">Abrir misa</a>
+                </div>
               </div>
             </div>
 
-            <div class="map">
-              <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps?q=Parroquia%20de%20Nuestra%20Se%C3%B1ora%20de%20la%20Paz%20Paseos%20de%20Churubusco&output=embed">
-              </iframe>
+            <div class="event" id="recepcion">
+              <div class="time">16:30<span>Recepción</span></div>
+              <div>
+                <p class="info" style="margin:0">
+                  <strong>Salón Grissel</strong><br>
+                  CDMX
+                </p>
+                <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+                  <a class="btn btn-primary" href="https://maps.app.goo.gl/Lnk4KmBMn2SB23AW8" target="_blank" rel="noopener">Abrir recepción</a>
+                  <a class="btn btn-ghost" href="#galeria">Ver galería</a>
+                </div>
+              </div>
             </div>
           </div>
 
-          <hr style="border:0; border-top:1px solid rgba(112,44,43,.10); margin: 16px 0;">
-
-          <div class="two-col" id="recepcion">
-            <div>
-              <p class="info">
-                <strong>Recepción · 16:30 hrs</strong><br>
-                SALÓN GRISSEL
-              </p>
-              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-                <a class="btn btn-primary" href="https://maps.app.goo.gl/Lnk4KmBMn2SB23AW8" target="_blank" rel="noopener">Abrir recepción</a>
-                <a class="btn btn-ghost" href="#galeria">Ver galería</a>
-              </div>
-            </div>
-
+          <div class="two-col" style="margin-top:14px;">
             <div class="map">
               <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps?q=Sal%C3%B3n%20Grissel&output=embed">
-              </iframe>
+                src="https://www.google.com/maps?q=Parroquia%20de%20Nuestra%20Se%C3%B1ora%20de%20la%20Paz%20Paseos%20de%20Churubusco&output=embed"></iframe>
+            </div>
+            <div class="map">
+              <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Sal%C3%B3n%20Grissel&output=embed"></iframe>
             </div>
           </div>
         </div>
@@ -495,7 +655,7 @@
             <a class="btn btn-primary" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51947356" target="_blank" rel="noopener">Abrir mesa</a>
             <button class="btn btn-ghost" id="copyGift" type="button">Copiar número</button>
           </div>
-          <p class="hint" id="copyGiftHint"></p>
+          <p class="info" id="copyGiftHint" style="margin-top:10px;"></p>
         </div>
       </div>
     </section>
@@ -544,8 +704,8 @@
     </div>
   </div>
 
-  <!-- Música (sin texto técnico) -->
-  <div class="music-fab hidden" id="musicFab" role="button" aria-label="Activar música">
+  <!-- Música -->
+  <div class="music-fab hidden" id="musicFab" role="button" aria-label="Música">
     <span class="dot" aria-hidden="true"></span>
     <span id="musicFabText">Música</span>
   </div>
@@ -592,7 +752,7 @@
     }
     tick(); setInterval(tick, 1000);
 
-    // Copy gift number
+    // Copy gift
     const copyGiftBtn = document.getElementById("copyGift");
     const copyGiftHint = document.getElementById("copyGiftHint");
     copyGiftBtn.addEventListener("click", async () => {
@@ -600,11 +760,11 @@
         await navigator.clipboard.writeText("51947356");
         copyGiftHint.textContent = "Copiado ✅";
       }catch(e){
-        copyGiftHint.textContent = "Número: 51947356";
+        copyGiftHint.textContent = "51947356";
       }
     });
 
-    // Animaciones
+    // Animaciones reveal
     const revealEls = Array.from(document.querySelectorAll(".reveal"));
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -663,29 +823,46 @@
       if(e.key === "ArrowRight") lbNext.click();
     });
 
-    // Música autoplay + fallback
+    // Música autoplay + fallback (con toggle premium)
     const audio = document.getElementById("audio");
     const musicFab = document.getElementById("musicFab");
     const musicFabText = document.getElementById("musicFabText");
+    let playing = false;
+
+    function setFabLabel(){
+      musicFabText.textContent = playing ? "Pausar" : "Música";
+    }
 
     async function tryAutoPlay(){
       try{
         audio.volume = 0.85;
         await audio.play();
-        musicFab.classList.add("hidden");
+        playing = true;
+        setFabLabel();
+        musicFab.classList.remove("hidden");
       }catch(err){
+        // iOS/Chrome puede bloquear: mostramos el botón para activar
+        playing = false;
+        setFabLabel();
         musicFab.classList.remove("hidden");
       }
     }
+
     window.addEventListener("load", () => { tryAutoPlay(); });
 
     musicFab.addEventListener("click", async () => {
       try{
-        await audio.play();
-        musicFabText.textContent = "Sonando";
-        setTimeout(()=>musicFab.classList.add("hidden"), 800);
+        if(!playing){
+          await audio.play();
+          playing = true;
+        }else{
+          audio.pause();
+          playing = false;
+        }
+        setFabLabel();
       }catch(e){
-        musicFabText.textContent = "Música";
+        playing = false;
+        setFabLabel();
       }
     });
 
