@@ -1356,8 +1356,8 @@
     const WHATSAPP_NUMBER = "525532327877";
     const WHATSAPP_MESSAGE = "Hola, confirmo mi asistencia a los XV años de Daira Pérez Romero. Mi nombre es: _____. Asistiremos: ____ personas. ¡Gracias!";
 
-    // Buenos deseos -> Sheets (Apps Script /exec)
-    const WISHES_ENDPOINT = "https://script.google.com/macros/s/AKfycby0zVVcDqoqNsoSsFhtss4qqyqd94yMQBQWe93cf9JAb4LjpoMmb_9ORQ683QuhF-lN/exec";
+    // ✅ Buenos deseos -> Apps Script (tu URL nueva)
+    const WISHES_ENDPOINT = "https://script.google.com/macros/s/AKfycbzrN_iecFpXJXlzKfEZk2dXz31W7acPKv6jJRT0vaJ67NYSegnW5YLPkObt-U4nDSLf/exec";
 
     // WhatsApp links
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
@@ -1501,12 +1501,11 @@
       tryAutoPlay();
     });
 
-    // Buenos deseos -> Google Sheets via Apps Script
+    // ✅ Buenos deseos -> Google Sheets via Apps Script (fix: no-cors + text/plain + sheetName)
     const wishesForm = document.getElementById("wishesForm");
     const wNote = document.getElementById("wNote");
     const wSend = document.getElementById("wSend");
 
-    // ====== ✅ CORRECCIÓN (solo Buenos deseos) ======
     wishesForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
@@ -1520,7 +1519,7 @@
 
       wSend.disabled = true;
       wSend.style.opacity = "0.72";
-      wNote.textContent = "Enviando…";
+      wNote.textContent = "Enviando...";
 
       const payload = {
         name,
@@ -1529,45 +1528,24 @@
         userAgent: navigator.userAgent
       };
 
-      let sent = false;
-
-      // 1) Intento normal (si el Apps Script devuelve JSON con { ok: true })
       try {
-        const res = await fetch(WISHES_ENDPOINT, {
+        // En Apps Script suele ser más estable así (evita CORS y preflight)
+        await fetch(WISHES_ENDPOINT, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-          redirect: "follow"
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
         });
 
-        const data = await res.json();
-        sent = !!(data && data.ok);
-      } catch (err) {
-        // 2) Fallback no-cors (manda aunque el navegador bloquee leer respuesta por CORS)
-        try {
-          await fetch(WISHES_ENDPOINT, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "text/plain;charset=utf-8" },
-            body: JSON.stringify(payload)
-          });
-          sent = true; // asumimos éxito
-        } catch (err2) {
-          sent = false;
-        }
-      }
-
-      if (sent) {
         wNote.textContent = "¡Gracias! Tu mensaje fue enviado ✨";
         wishesForm.reset();
-      } else {
+      } catch (err) {
         wNote.textContent = "No se pudo enviar. Revisa tu conexión e intenta de nuevo.";
+      } finally {
+        wSend.disabled = false;
+        wSend.style.opacity = "1";
       }
-
-      wSend.disabled = false;
-      wSend.style.opacity = "1";
     });
-    // ====== ✅ FIN CORRECCIÓN ======
   </script>
 </body>
 </html>
