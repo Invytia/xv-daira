@@ -1506,6 +1506,7 @@
     const wNote = document.getElementById("wNote");
     const wSend = document.getElementById("wSend");
 
+    // ====== ✅ CORRECCIÓN (solo Buenos deseos) ======
     wishesForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
@@ -1521,27 +1522,52 @@
       wSend.style.opacity = "0.72";
       wNote.textContent = "Enviando…";
 
+      const payload = {
+        name,
+        message,
+        sheetName: "Hoja 1",
+        userAgent: navigator.userAgent
+      };
+
+      let sent = false;
+
+      // 1) Intento normal (si el Apps Script devuelve JSON con { ok: true })
       try {
         const res = await fetch(WISHES_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, message, userAgent: navigator.userAgent })
+          body: JSON.stringify(payload),
+          redirect: "follow"
         });
 
-        const data = await res.json().catch(() => ({}));
-        if (data && data.ok) {
-          wNote.textContent = "¡Gracias! Tu mensaje fue enviado ✨";
-          wishesForm.reset();
-        } else {
-          wNote.textContent = "No se pudo enviar. Intenta de nuevo en unos segundos.";
-        }
+        const data = await res.json();
+        sent = !!(data && data.ok);
       } catch (err) {
-        wNote.textContent = "No se pudo enviar. Revisa tu conexión e intenta de nuevo.";
-      } finally {
-        wSend.disabled = false;
-        wSend.style.opacity = "1";
+        // 2) Fallback no-cors (manda aunque el navegador bloquee leer respuesta por CORS)
+        try {
+          await fetch(WISHES_ENDPOINT, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(payload)
+          });
+          sent = true; // asumimos éxito
+        } catch (err2) {
+          sent = false;
+        }
       }
+
+      if (sent) {
+        wNote.textContent = "¡Gracias! Tu mensaje fue enviado ✨";
+        wishesForm.reset();
+      } else {
+        wNote.textContent = "No se pudo enviar. Revisa tu conexión e intenta de nuevo.";
+      }
+
+      wSend.disabled = false;
+      wSend.style.opacity = "1";
     });
+    // ====== ✅ FIN CORRECCIÓN ======
   </script>
 </body>
 </html>
