@@ -1356,8 +1356,9 @@
     const WHATSAPP_NUMBER = "525532327877";
     const WHATSAPP_MESSAGE = "Hola, confirmo mi asistencia a los XV años de Daira Pérez Romero. Mi nombre es: _____. Asistiremos: ____ personas. ¡Gracias!";
 
-    // ✅ Buenos deseos -> Apps Script (tu URL nueva)
-    const WISHES_ENDPOINT = "https://script.google.com/macros/s/AKfycbzrN_iecFpXJXlzKfEZk2dXz31W7acPKv6jJRT0vaJ67NYSegnW5YLPkObt-U4nDSLf/exec";
+    // ✅ Buenos deseos -> Sheets (TU URL /exec)
+    const WISHES_ENDPOINT = "https://script.google.com/macros/s/AKfycbzbMRXY8O_3-mGDr5CTlRFkfzaBj0GgyZXK4skoaML1DAVHE7vUi5BspTOkrG88P2Kf7w/exec";
+    const WISHES_SHEET_NAME = "Hoja 1";
 
     // WhatsApp links
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
@@ -1501,7 +1502,7 @@
       tryAutoPlay();
     });
 
-    // ✅ Buenos deseos -> Google Sheets via Apps Script (fix: no-cors + text/plain + sheetName)
+    // ✅ Buenos deseos -> Google Sheets via Apps Script
     const wishesForm = document.getElementById("wishesForm");
     const wNote = document.getElementById("wNote");
     const wSend = document.getElementById("wSend");
@@ -1519,26 +1520,29 @@
 
       wSend.disabled = true;
       wSend.style.opacity = "0.72";
-      wNote.textContent = "Enviando...";
-
-      const payload = {
-        name,
-        message,
-        sheetName: "Hoja 1",
-        userAgent: navigator.userAgent
-      };
+      wNote.textContent = "Enviando…";
 
       try {
-        // En Apps Script suele ser más estable así (evita CORS y preflight)
-        await fetch(WISHES_ENDPOINT, {
+        const response = await fetch(WISHES_ENDPOINT, {
           method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify(payload)
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            message,
+            sheetName: WISHES_SHEET_NAME,
+            userAgent: navigator.userAgent
+          })
         });
 
-        wNote.textContent = "¡Gracias! Tu mensaje fue enviado ✨";
-        wishesForm.reset();
+        const result = await response.json().catch(() => ({}));
+
+        if (result && result.ok) {
+          wNote.textContent = "¡Gracias! Tu mensaje fue enviado ✨";
+          wishesForm.reset();
+        } else {
+          const msg = (result && result.error) ? result.error : "Error desconocido";
+          wNote.textContent = "No se pudo guardar en la hoja: " + msg;
+        }
       } catch (err) {
         wNote.textContent = "No se pudo enviar. Revisa tu conexión e intenta de nuevo.";
       } finally {
