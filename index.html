@@ -1,1152 +1,1545 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="es-MX">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#E7C7BE" />
   <title>Mis XV Años, Daira</title>
 
-  <!-- Tipografías (editorial + script) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@300;400;500;600&family=Allura&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Paleta rose champagne + dorado */
-      --ink: #2b2624;
-      --muted: #6f6764;
+      /* Rose champagne */
+      --champ:#D9B7AC;
+      --rose:#CFA59B;
+      --blush:#E7C7BE;
+      --soft:#F3D7D4;
+      --ivory:#FBF6F4;
+      --sand:#EEDBCE;
 
-      --bg: #fbf6f4;
-      --paper: rgba(255,255,255,.58);
-      --glass: rgba(255,255,255,.44);
+      /* Dorado (foil) */
+      --gold:#C9A46A;
+      --gold2:#E6D1A6;
+      --gold3:#B88B4A;
 
-      --rose-1: #F3D7D4; /* rose */
-      --rose-2: #EEDBCE; /* champagne */
-      --rose-3: #DB9F95; /* nude */
-      --rose-4: #C56869; /* dusty rose */
-      --rose-5: #702C2B; /* (no usar como acento dominante) */
+      --ink:#241B18;
+      --muted: rgba(36,27,24,.70);
 
-      --gold-1: #f3e2b6;
-      --gold-2: #e6c980;
-      --gold-3: #caa24f;
+      --border: rgba(36,27,24,.12);
+      --shadow: 0 34px 120px rgba(36,27,24,.14);
+      --shadow2: 0 18px 60px rgba(36,27,24,.10);
 
-      --radius-xl: 26px;
-      --radius-lg: 18px;
-      --radius-md: 14px;
-      --shadow: 0 18px 60px rgba(30,20,15,.12);
-      --shadow-soft: 0 10px 30px rgba(30,20,15,.10);
-      --border: 1px solid rgba(80,60,50,.14);
-      --line: 1px solid rgba(50,40,35,.12);
+      --radius: 38px;
+      --radius-sm: 18px;
+      --max: 1120px;
 
-      --serif: "Fraunces", serif;
-      --sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --script: "Allura", cursive;
+      /* Ajusta si la cara se corta */
+      --heroY: 48%;
+
+      /* Fondos editorial por sección */
+      --bgA:
+        radial-gradient(1200px 760px at 16% 10%, rgba(243,215,212,.64), transparent 58%),
+        radial-gradient(900px 600px at 85% 22%, rgba(238,219,206,.54), transparent 55%),
+        linear-gradient(180deg, rgba(251,246,244,1) 0%, rgba(243,215,212,.08) 60%, rgba(251,246,244,1) 100%);
+
+      --bgB:
+        radial-gradient(1200px 760px at 10% 30%, rgba(238,219,206,.68), transparent 58%),
+        radial-gradient(900px 600px at 90% 10%, rgba(231,199,190,.58), transparent 55%),
+        linear-gradient(180deg, rgba(251,246,244,1) 0%, rgba(238,219,206,.10) 70%, rgba(251,246,244,1) 100%);
+
+      --bgC:
+        radial-gradient(1200px 760px at 30% 0%, rgba(231,199,190,.60), transparent 58%),
+        radial-gradient(900px 600px at 80% 60%, rgba(243,215,212,.50), transparent 55%),
+        linear-gradient(180deg, rgba(251,246,244,1) 0%, rgba(231,199,190,.08) 70%, rgba(251,246,244,1) 100%);
     }
 
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    html,body{ margin:0; padding:0; }
+    html{ scroll-behavior:smooth; }
     body{
-      margin:0;
-      color:var(--ink);
-      font-family:var(--sans);
-      background:
-        radial-gradient(900px 500px at 15% 10%, rgba(238,219,206,.75) 0%, transparent 60%),
-        radial-gradient(900px 500px at 85% 30%, rgba(243,215,212,.75) 0%, transparent 65%),
-        linear-gradient(180deg, #fff 0%, var(--bg) 28%, #fff 100%);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bgA);
       overflow-x:hidden;
     }
+    a{ color:inherit; text-decoration:none; }
 
-    /* Micro animaciones */
-    @keyframes floatIn {
-      from { transform: translateY(14px); opacity:0; }
-      to   { transform: translateY(0); opacity:1; }
+    /* Textura premium (paper + grain) */
+    .grain{
+      pointer-events:none;
+      position: fixed;
+      inset: -40%;
+      opacity: .05;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      transform: rotate(6deg);
     }
-    @keyframes shimmer {
-      0% { transform: translateX(-120%) rotate(12deg); opacity:.0; }
-      20% { opacity:.55; }
-      60% { opacity:.15; }
-      100% { transform: translateX(140%) rotate(12deg); opacity:0; }
+    .paper{
+      pointer-events:none;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(900px 520px at 50% 10%, rgba(255,255,255,.26), transparent 60%),
+        radial-gradient(900px 520px at 50% 90%, rgba(255,255,255,.18), transparent 60%);
+      mix-blend-mode: soft-light;
+      opacity: .65;
     }
 
-    /* Top nav pill */
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:50;
-      padding:14px 14px 10px;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.25));
-      border-bottom: 1px solid rgba(90,70,60,.10);
-    }
-    .navpill{
-      max-width:1100px;
+    .wrap{
+      max-width: var(--max);
       margin:0 auto;
+      padding: 18px;
+      position:relative;
+      z-index:1;
+    }
+
+    /* ===== Intro ===== */
+    .intro{
+      position: fixed; inset: 0; z-index: 9999;
+      display:grid; place-items:center;
+      background:
+        radial-gradient(900px 520px at 50% 15%, rgba(231,199,190,.52), transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,.58), rgba(0,0,0,.58));
+      backdrop-filter: blur(10px);
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+    .intro.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+
+    .intro-card{
+      width: min(600px, calc(100% - 28px));
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,.20);
+      background: rgba(255,255,255,.10);
+      box-shadow: 0 40px 120px rgba(0,0,0,.34);
+      overflow:hidden;
+      position:relative;
+      isolation:isolate;
+    }
+    .intro-bg{ height: 300px; background:#111; position:relative; }
+    .intro-bg img{
+      width:100%; height:100%;
+      object-fit: cover;
+      object-position: 50% var(--heroY);
+      filter: blur(2px) contrast(1.06) saturate(1.03);
+      transform: scale(1.14);
+      opacity:.95;
+      display:block;
+    }
+    .intro-bg::after{
+      content:""; position:absolute; inset:0;
+      background:
+        radial-gradient(900px 520px at 50% 15%, rgba(201,164,106,.22), transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.58));
+    }
+    .intro-body{ padding: 22px 18px 30px; text-align:center; position:relative; }
+    .intro-title{
+      font-family:"Cormorant Garamond", ui-serif, Georgia, serif;
+      font-weight:700;
+      color:#fff;
+      text-shadow: 0 18px 70px rgba(0,0,0,.46);
+      font-size: 52px;
+      margin: 0 0 8px;
+      letter-spacing:.2px;
+    }
+    .intro-sub{
+      margin: 0 0 18px;
+      color: rgba(255,255,255,.88);
+      font-weight: 400;
+      letter-spacing:.22em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    .seal{
+      width: 112px; height: 112px; border-radius: 999px;
+      display:grid; place-items:center;
+      margin: 0 auto;
+      cursor:pointer; user-select:none;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.58), transparent 60%),
+        linear-gradient(180deg, rgba(230,209,166,1), rgba(201,164,106,1));
+      border: 1px solid rgba(255,255,255,.30);
+      box-shadow: 0 18px 56px rgba(0,0,0,.36);
+      position:relative;
+      transition: transform .12s ease, filter .2s ease;
+    }
+    .seal::after{
+      content:""; position:absolute; inset:-18px;
+      border-radius:999px;
+      border: 1px solid rgba(255,255,255,.14);
+      opacity:.95;
+    }
+    .seal:hover{ filter: brightness(1.02); }
+    .seal:active{ transform: translateY(1px) scale(.99); }
+    .seal-hint{ margin-top: 12px; color: rgba(255,255,255,.86); font-size: 13px; }
+
+    /* ===== Sticky Nav ===== */
+    .topbar{
+      position: sticky;
+      top: 10px;
+      z-index: 60;
       display:flex;
-      gap:10px;
       justify-content:center;
+      pointer-events:none;
+      margin-top: 8px;
+    }
+    .nav{
+      pointer-events:auto;
+      display:flex;
+      gap: 8px;
       flex-wrap:wrap;
-      padding:10px 12px;
-      border-radius:999px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(110,80,70,.15);
-      box-shadow: 0 10px 28px rgba(30,20,15,.08);
+      justify-content:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.74);
+      border: 1px solid rgba(36,27,24,.10);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow2);
     }
-    .navpill a{
-      text-decoration:none;
-      color:var(--muted);
+    .nav a{
+      font-size: 12px;
       letter-spacing:.18em;
-      text-transform:uppercase;
-      font-size:11px;
-      padding:10px 12px;
-      border-radius:999px;
-      transition:.2s ease;
+      text-transform: uppercase;
+      color: rgba(36,27,24,.70);
+      padding: 8px 10px;
+      border-radius: 999px;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
     }
-    .navpill a:hover{
-      background: rgba(238,219,206,.45);
-      color:var(--ink);
+    .nav a:hover{
+      background: linear-gradient(180deg, rgba(230,209,166,.38), rgba(231,199,190,.32));
+      color: rgba(36,27,24,.92);
       transform: translateY(-1px);
     }
 
-    /* Contenedor general */
-    .wrap{
-      max-width:1100px;
-      margin:0 auto;
-      padding: 18px 18px 80px;
+    /* ===== HERO editorial ===== */
+    .hero{
+      min-height: 92vh;
+      display:grid;
+      place-items:center;
+      padding: 10px 0 12px;
+      position:relative;
     }
 
-    /* HERO */
-    .hero{
-      position:relative;
-      border-radius: var(--radius-xl);
+    .hero-frame{
+      width:100%;
+      border-radius: clamp(18px, 3vw, 46px);
       overflow:hidden;
+      border: 1px solid rgba(36,27,24,.10);
       box-shadow: var(--shadow);
-      border: 1px solid rgba(80,60,50,.12);
-      margin-top: 16px;
-      background: #000;
+      background: #fff;
+      position:relative;
+      isolation:isolate;
     }
-    .hero::after{
-      /* viñeta suave para que se lea */
+    /* borde interior tipo marco editorial */
+    .hero-frame::before{
+      content:"";
+      position:absolute; inset: 12px;
+      border-radius: clamp(14px, 2.4vw, 40px);
+      border: 1px solid rgba(255,255,255,.38);
+      box-shadow: inset 0 0 0 1px rgba(36,27,24,.10);
+      pointer-events:none;
+      z-index: 5;
+    }
+
+    .hero-cover{
+      position:relative;
+      height: 92vh;
+      min-height: 820px;
+      background: #111;
+      overflow:hidden;
+    }
+    @media (max-width: 560px){
+      .hero-cover{ min-height: 980px; }
+    }
+
+    .hero-cover img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: 50% var(--heroY);
+      display:block;
+      transform: scale(1.06);
+      animation: kenburns 18s ease-in-out infinite alternate;
+      filter: contrast(1.06) saturate(1.04);
+      z-index: 0;
+      position:relative;
+    }
+    @keyframes kenburns{
+      from { transform: scale(1.06) translateY(0px); }
+      to   { transform: scale(1.12) translateY(-10px); }
+    }
+    .hero-cover::after{
       content:"";
       position:absolute; inset:0;
       background:
-        radial-gradient(900px 600px at 50% 30%, rgba(0,0,0,.12) 0%, rgba(0,0,0,.42) 70%),
-        linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.48));
+        radial-gradient(1000px 560px at 50% 18%, rgba(230,209,166,.18), transparent 62%),
+        radial-gradient(1000px 560px at 50% 120%, rgba(0,0,0,.62), transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,.14) 0%, rgba(0,0,0,.08) 40%, rgba(0,0,0,.26) 72%, rgba(0,0,0,.56) 100%);
+      pointer-events:none;
+      z-index: 2;
+    }
+
+    /* Panel glass + foil highlight */
+    .hero-panel{
+      position:absolute;
+      left: 50%;
+      bottom: clamp(18px, 4vw, 42px);
+      transform: translateX(-50%);
+      width: min(980px, calc(100% - 26px));
+      border-radius: 48px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 26px 110px rgba(0,0,0,.22);
+      padding: clamp(18px, 3.4vw, 34px);
+      z-index: 6;
+      overflow:hidden;
+    }
+    .hero-panel::before{
+      content:"";
+      position:absolute; inset:-30%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(230,209,166,.30), transparent 60%);
+      transform: rotate(18deg);
+      opacity:.85;
       pointer-events:none;
     }
-    .hero img{
-      width:100%;
-      height:min(76vh, 780px);
-      object-fit:cover;
-      /* 🔥 clave para que NO corte cara: subimos el encuadre */
-      object-position: 50% 28%;
-      display:block;
-      transform: scale(1.02);
-    }
-
-    .heroCard{
+    /* brillo foil */
+    .hero-panel::after{
+      content:"";
       position:absolute;
-      left:50%;
-      bottom: 34px;
-      transform: translateX(-50%);
-      width: min(920px, calc(100% - 34px));
-      border-radius: 22px;
-      background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.46));
-      border: 1px solid rgba(110,80,70,.18);
-      box-shadow: 0 18px 60px rgba(10,6,5,.25);
-      backdrop-filter: blur(14px);
-      padding: 22px 22px 18px;
-      animation: floatIn .7s ease both;
+      top:-60%; left:-30%;
+      width: 60%;
+      height: 240%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.40), transparent);
+      transform: rotate(16deg) translateX(-140%);
+      animation: sheen 7s ease-in-out infinite;
+      opacity: .55;
+      pointer-events:none;
+    }
+    @keyframes sheen{
+      0%{ transform: rotate(16deg) translateX(-160%); }
+      45%{ transform: rotate(16deg) translateX(260%); }
+      100%{ transform: rotate(16deg) translateX(260%); }
     }
 
-    .heroMeta{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:center;
-      color: rgba(40,30,28,.75);
-      font-size:12px;
-      letter-spacing:.28em;
-      text-transform:uppercase;
+    .kicker{
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      font-size: 12px;
+      letter-spacing: .30em;
+      text-transform: uppercase;
+      color: rgba(36,27,24,.68);
       margin-bottom: 10px;
+      position:relative; z-index:1;
     }
-    .dot{
-      width:8px; height:8px; border-radius:50%;
-      background: linear-gradient(180deg, var(--gold-1), var(--gold-3));
-      box-shadow: 0 0 0 4px rgba(230,201,128,.25);
+    .kdot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(180deg, var(--gold2), var(--gold));
+      box-shadow: 0 0 0 10px rgba(201,164,106,.16);
     }
 
     .title{
-      font-family: var(--serif);
-      font-weight: 400;
+      font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
+      font-weight: 700;
+      color: rgba(36,27,24,.94);
       text-align:center;
-      font-size: clamp(34px, 5vw, 66px);
-      margin: 2px 0 8px;
-      letter-spacing: .02em;
-      color: #2b2624;
+      margin:0;
+      font-size: clamp(54px, 6.6vw, 102px);
+      line-height: .90;
+      letter-spacing: .2px;
+      position:relative; z-index:1;
     }
+
+    .orn{
+      display:flex; justify-content:center;
+      margin: 12px 0 10px;
+      opacity: .92;
+      position:relative; z-index:1;
+    }
+    .orn svg{ width: 320px; max-width: 74vw; }
+    .orn path{ stroke: rgba(36,27,24,.34); }
+
     .sub{
       text-align:center;
-      margin: 0 0 10px;
-      color: rgba(40,30,28,.80);
-      font-size: 14px;
+      margin: 0;
+      color: rgba(36,27,24,.72);
+      line-height: 1.7;
+      font-size: 15px;
+      position:relative; z-index:1;
     }
-    .sub strong{ font-weight:600; }
+    .sub strong{ color: rgba(36,27,24,.92); }
 
-    .dividerIcon{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:12px;
-      margin: 10px 0 14px;
-      color: rgba(60,45,40,.55);
-    }
-    .dividerIcon::before,
-    .dividerIcon::after{
-      content:"";
-      height:1px;
-      width: 110px;
-      background: rgba(60,45,40,.20);
-    }
-    .diamond{
-      width:10px; height:10px;
-      transform: rotate(45deg);
-      border: 1px solid rgba(60,45,40,.30);
-      background: rgba(255,255,255,.25);
-    }
-
-    .countGrid{
+    .countdown{
+      margin-top: 16px;
       display:grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap: 12px;
-      margin-top: 12px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      position:relative; z-index:1;
     }
-    .countBox{
-      border-radius: 16px;
-      background: rgba(255,255,255,.38);
-      border: 1px solid rgba(110,80,70,.16);
-      padding: 12px 10px 10px;
+    .tbox{
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,.52), transparent 62%),
+        linear-gradient(180deg, rgba(230,209,166,.18), rgba(243,215,212,.18));
+      border: 1px solid rgba(36,27,24,.10);
+      padding: 12px 10px;
       text-align:center;
       position:relative;
       overflow:hidden;
     }
-    .countBox::after{
-      content:"";
-      position:absolute;
-      top:-30px; left:-30px;
-      width: 90px; height: 90px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(230,201,128,.35), transparent 60%);
-      filter: blur(1px);
-      opacity:.55;
+    .num{
+      font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
+      font-size: clamp(22px, 3.2vw, 36px);
+      font-weight: 700;
+      color: rgba(36,27,24,.92);
+      line-height: 1;
+      position:relative;
     }
-    .countNum{
-      font-family: var(--serif);
-      font-size: 28px;
-      font-weight: 600;
-      margin:0;
-    }
-    .countLbl{
-      margin: 4px 0 0;
+    .lbl{
+      margin-top: 6px;
       font-size: 11px;
-      letter-spacing: .24em;
+      letter-spacing: .20em;
       text-transform: uppercase;
-      color: rgba(50,38,35,.70);
+      color: rgba(36,27,24,.56);
+      position:relative;
+    }
+    @media (max-width: 560px){
+      .countdown{ grid-template-columns: repeat(2, 1fr); }
     }
 
-    .heroActions{
-      display:flex;
-      gap:10px;
+    .cta{
+      display:flex; flex-wrap:wrap; gap:10px;
       justify-content:center;
-      flex-wrap:wrap;
-      margin-top: 14px;
+      margin-top: 16px;
+      position:relative; z-index:1;
     }
-
     .btn{
-      border:none;
-      cursor:pointer;
-      padding: 12px 16px;
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 12px 18px;
       border-radius: 999px;
-      font-family: var(--sans);
-      font-weight: 600;
+      font-weight: 650;
       font-size: 14px;
-      letter-spacing:.02em;
-      transition: .2s ease;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      min-width: 170px;
+      border: 1px solid transparent;
+      transition: transform .12s ease, filter .18s ease, background .18s ease, box-shadow .18s ease;
+      user-select:none;
+      cursor:pointer;
       position:relative;
       overflow:hidden;
+      white-space:nowrap;
     }
     .btn:active{ transform: translateY(1px); }
 
-    .btnGold{
-      background: linear-gradient(180deg, var(--gold-1), var(--gold-2));
-      color: #2b2624;
-      box-shadow: 0 12px 22px rgba(202,162,79,.20);
-      border: 1px solid rgba(160,120,40,.25);
+    .btn-primary{
+      color: rgba(36,27,24,.92);
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,.48), transparent 60%),
+        linear-gradient(180deg, rgba(230,209,166,1), rgba(201,164,106,1));
+      border-color: rgba(36,27,24,.12);
+      box-shadow: 0 18px 46px rgba(36,27,24,.12);
     }
-    .btnGold::after{
+    .btn-primary::after{
       content:"";
       position:absolute;
-      inset:-40px;
-      width:40%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
-      transform: rotate(12deg);
-      animation: shimmer 4.2s ease-in-out infinite;
-      pointer-events:none;
+      top:-40%; left:-40%;
+      width: 60%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.44), transparent);
+      transform: rotate(18deg) translateX(-140%);
+      transition: transform .9s ease;
+      opacity: .55;
     }
-    .btnGhost{
-      background: rgba(255,255,255,.45);
-      border: 1px solid rgba(110,80,70,.18);
-      color: #2b2624;
-      box-shadow: 0 10px 24px rgba(30,20,15,.08);
-      min-width: 150px;
+    .btn-primary:hover{
+      box-shadow: 0 24px 72px rgba(36,27,24,.14);
+      transform: translateY(-1px);
     }
-    .btnGhost:hover{ background: rgba(238,219,206,.40); }
+    .btn-primary:hover::after{ transform: rotate(18deg) translateX(260%); }
 
-    /* Separadores / franjas */
-    .band{
-      margin: 26px 0 0;
-      border-radius: var(--radius-xl);
-      overflow:hidden;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(90,70,60,.12);
-      background: #fff;
+    .btn-ghost{
+      background: rgba(255,255,255,.76);
+      border-color: rgba(36,27,24,.12);
+      color: rgba(36,27,24,.84);
     }
-    .bandTop{
-      height: 72px;
+    .btn-ghost:hover{ transform: translateY(-1px); box-shadow: 0 14px 40px rgba(36,27,24,.10); }
+
+    /* ===== Stages + franjas + curvas ===== */
+    .stage{
+      position:relative;
+      margin: 18px 0 22px;
+      border-radius: 52px;
+      overflow:hidden;
+      border: 1px solid rgba(36,27,24,.10);
+      box-shadow: var(--shadow2);
+      background: rgba(255,255,255,.62);
+    }
+    .stage.bgA{ background: var(--bgA); }
+    .stage.bgB{ background: var(--bgB); }
+    .stage.bgC{ background: var(--bgC); }
+
+    /* franja superior tipo editorial */
+    .stripe{
+      height: 34px;
       background:
-        radial-gradient(900px 220px at 10% 50%, rgba(238,219,206,.95) 0%, transparent 70%),
-        radial-gradient(900px 220px at 90% 50%, rgba(243,215,212,.95) 0%, transparent 70%),
-        linear-gradient(90deg, rgba(238,219,206,.65), rgba(243,215,212,.55));
+        linear-gradient(90deg,
+          rgba(230,209,166,.50),
+          rgba(231,199,190,.45),
+          rgba(238,219,206,.52),
+          rgba(243,215,212,.42)
+        );
       position:relative;
     }
-    .bandTop::after{
+    .stripe::after{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,0));
+      background:
+        radial-gradient(600px 40px at 30% 50%, rgba(255,255,255,.38), transparent 60%),
+        radial-gradient(600px 40px at 70% 50%, rgba(255,255,255,.28), transparent 60%);
+      opacity:.65;
+      mix-blend-mode: overlay;
       pointer-events:none;
     }
-    .bandBody{
-      padding: 26px 18px 30px;
-      background:
-        radial-gradient(900px 380px at 20% 0%, rgba(238,219,206,.35), transparent 60%),
-        radial-gradient(900px 380px at 80% 10%, rgba(243,215,212,.30), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.54));
+
+    .divider{
+      height: 118px;
+      position:relative;
+      background: linear-gradient(180deg, rgba(201,164,106,.18), rgba(243,215,212,.06));
+    }
+    .divider.alt{
+      background: linear-gradient(180deg, rgba(238,219,206,.34), rgba(251,246,244,.18));
+    }
+    .divider svg{
+      position:absolute;
+      left:0; right:0;
+      bottom:-1px;
+      width:100%;
+      height: 100%;
     }
 
-    .sectionTitle{
-      display:flex;
-      align-items:baseline;
-      gap:14px;
-      padding: 0 4px 10px;
-      margin: 0 0 8px;
-      border-bottom: var(--line);
+    .section{
+      padding: 22px 22px 26px;
+      position:relative;
     }
-    .sectionTitle h2{
-      margin:0;
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: 34px;
-      letter-spacing: .02em;
-    }
-    .sectionTitle span{
-      color: rgba(60,45,40,.55);
-      letter-spacing: .28em;
-      text-transform: uppercase;
-      font-size: 12px;
+    @media (max-width: 560px){
+      .section{ padding: 18px 16px 22px; }
+      .divider{ height: 98px; }
+      .stage{ border-radius: 38px; }
     }
 
-    .centerText{
-      text-align:center;
-      color: rgba(40,30,28,.85);
-      max-width: 760px;
-      margin: 12px auto 0;
-      line-height: 1.65;
-    }
-
-    /* Cards de ubicaciones */
-    .locGrid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
+    .section-head{
+      display:flex; align-items:baseline; justify-content:space-between;
       gap: 14px;
-      margin-top: 16px;
+      margin: 0 0 10px;
     }
-    @media (max-width: 920px){
-      .countGrid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .locGrid{ grid-template-columns: 1fr; }
-      .hero img{ height: min(78vh, 680px); }
+    .section-title{
+      font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: rgba(36,27,24,.92);
+      margin:0;
+      letter-spacing:.2px;
+    }
+    .line{
+      height:1px; flex: 1;
+      background: linear-gradient(90deg, rgba(201,164,106,.50), rgba(36,27,24,0));
+      border-radius:999px;
+      margin-top: 18px;
     }
 
-    .locCard{
-      border-radius: 20px;
+    .panel{
+      border-radius: var(--radius);
+      border: 1px solid rgba(36,27,24,.10);
+      background: rgba(255,255,255,.82);
+      box-shadow: var(--shadow2);
       overflow:hidden;
-      border: 1px solid rgba(110,80,70,.16);
-      background: rgba(255,255,255,.52);
-      box-shadow: 0 14px 34px rgba(25,18,14,.10);
-      display:flex;
-      flex-direction:column;
-      min-height: 540px;
-    }
-    .locPhoto{
       position:relative;
-      height: 210px;
+    }
+    .panel-inner{ padding: 18px; position:relative; }
+
+    .info{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 15px;
+      text-align:left;
+    }
+    .info strong{ color: rgba(36,27,24,.90); }
+
+    /* Centrados para Mesa y Confirmación */
+    .centered .panel-inner{ padding: 26px 18px; text-align:center; }
+    .centered .info{ text-align:center; }
+    .centered .actions{ justify-content:center; }
+
+    /* ===== Ubicaciones ===== */
+    .loc-grid{ display:grid; gap: 16px; }
+
+    .loc-card{
+      border-radius: 36px;
+      border: 1px solid rgba(36,27,24,.10);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(230,209,166,.14), transparent 60%),
+        linear-gradient(180deg, rgba(243,215,212,.22), rgba(238,219,206,.10));
       overflow:hidden;
+      position:relative;
     }
-    .locPhoto img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position:center;
-      transform: scale(1.05);
-      filter: contrast(1.03) saturate(1.02);
+    .loc-layout{
+      display:grid;
+      grid-template-columns: 1.02fr .98fr;
+      align-items:stretch;
     }
-    .locPhoto::after{
+    @media (max-width: 960px){
+      .loc-layout{ grid-template-columns: 1fr; }
+    }
+
+    .loc-left{
+      padding: 18px;
+      display:grid;
+      grid-template-columns: 240px 1fr;
+      gap: 16px;
+      align-items:stretch;
+    }
+    @media (max-width: 960px){
+      .loc-left{ grid-template-columns: 1fr; }
+    }
+
+    .loc-photo{
+      border-radius: 28px;
+      overflow:hidden;
+      border: 1px solid rgba(36,27,24,.10);
+      box-shadow: 0 16px 50px rgba(36,27,24,.10);
+      background:#111;
+      position:relative;
+      min-height: 240px;
+    }
+    .loc-photo img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.03);
+    }
+    .loc-photo::after{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.35));
+      background:
+        radial-gradient(420px 220px at 30% 20%, rgba(255,255,255,.20), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.26));
       pointer-events:none;
     }
-    .locBadge{
-      position:absolute;
-      left:16px; bottom:14px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.70);
-      border: 1px solid rgba(120,90,80,.18);
-      backdrop-filter: blur(10px);
-    }
-    .timePill{
-      width:56px; height:56px;
-      border-radius: 16px;
-      display:grid;
-      place-items:center;
-      background: rgba(238,219,206,.55);
-      border: 1px solid rgba(120,90,80,.16);
-      font-family: var(--serif);
-      font-weight: 600;
-      color:#2b2624;
-      line-height: 1;
-      padding-top: 2px;
-    }
-    .timePill small{
-      display:block;
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: 10px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color: rgba(60,45,40,.70);
-      margin-top: 4px;
-    }
-    .locBadgeText{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-    }
-    .locBadgeText b{ font-size: 16px; }
-    .locBadgeText span{ color: rgba(60,45,40,.75); font-size: 13px; }
 
-    .locBody{
-      padding: 16px 16px 18px;
+    .loc-info{
+      border-radius: 28px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(36,27,24,.10);
+      padding: 16px 16px 14px;
       display:flex;
       flex-direction:column;
-      gap: 12px;
-      flex:1;
+      justify-content:space-between;
+      box-shadow: 0 14px 44px rgba(36,27,24,.08);
     }
-    .locMeta{
-      color: rgba(60,45,40,.86);
-      line-height:1.45;
+
+    .loc-top{
+      display:flex; gap: 14px; align-items:flex-start;
     }
-    .mapWrap{
-      border-radius: 16px;
+    .badge{
+      flex: 0 0 auto;
+      width: 124px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.52), transparent 60%),
+        linear-gradient(180deg, rgba(230,209,166,.24), rgba(255,255,255,.70));
+      border: 1px solid rgba(36,27,24,.10);
+      text-align:center;
+      padding: 12px 10px;
+      color: rgba(36,27,24,.92);
+      box-shadow: 0 14px 34px rgba(36,27,24,.08);
       overflow:hidden;
-      border: 1px solid rgba(110,80,70,.16);
-      background: rgba(255,255,255,.7);
-      box-shadow: 0 12px 24px rgba(25,18,14,.08);
     }
-    .mapWrap iframe{
-      width:100%;
-      height: 240px;
-      border:0;
+    .badge .t{ font-weight: 900; font-size: 18px; letter-spacing:.02em; }
+    .badge .s{
       display:block;
+      margin-top: 6px;
+      font-size: 11px;
+      letter-spacing:.20em;
+      text-transform: uppercase;
+      opacity:.78;
+      font-weight: 900;
+      white-space: nowrap;
     }
-    .locBtns{
+    .loc-text h3{
+      margin: 2px 0 6px;
+      font-size: 19px;
+      letter-spacing:.01em;
+      color: rgba(36,27,24,.92);
+    }
+    .loc-text p{ margin:0; color: rgba(36,27,24,.70); line-height:1.6; }
+
+    .loc-actions{
+      margin-top: 14px;
       display:flex;
       gap: 10px;
       flex-wrap:wrap;
-      justify-content:flex-start;
-      margin-top: 2px;
     }
 
-    /* Separador con foto 01.jpg */
-    .photoSeparator{
-      margin-top: 26px;
-      border-radius: var(--radius-xl);
-      overflow:hidden;
-      border: 1px solid rgba(90,70,60,.12);
-      box-shadow: var(--shadow);
-      position:relative;
-      background:#000;
-    }
-    .photoSeparator img{
+    .map{
       width:100%;
-      height: 440px;
-      object-fit:cover;
-      object-position: 50% 30%;
+      min-height: 320px;
+      height: 100%;
+      border-left: 1px solid rgba(36,27,24,.10);
+      background: rgba(238,219,206,.18);
+    }
+    @media (max-width: 960px){
+      .map{ border-left:0; border-top:1px solid rgba(36,27,24,.10); min-height: 340px; }
+    }
+    .map iframe{ width:100%; height:100%; border:0; display:block; }
+
+    /* ===== Foto separador ===== */
+    .photo-break{
+      border-radius: 50px;
+      overflow:hidden;
+      border: 1px solid rgba(36,27,24,.10);
+      box-shadow: var(--shadow);
+      background:#111;
+      position:relative;
+      isolation:isolate;
+      margin-top: 18px;
+    }
+    .photo-break img{
+      width:100%; height: 560px;
+      object-fit: cover;
+      object-position: 50% 22%;
       display:block;
       transform: scale(1.02);
-      filter: contrast(1.02) saturate(1.02);
     }
-    .photoSeparator::after{
+    @media (max-width: 560px){
+      .photo-break img{ height: 480px; }
+    }
+    .photo-break::after{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(90deg, rgba(0,0,0,.36), rgba(0,0,0,.10), rgba(0,0,0,.34));
+      background:
+        radial-gradient(900px 520px at 30% 20%, rgba(201,164,106,.18), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.00), rgba(0,0,0,.44));
       pointer-events:none;
+      z-index:1;
     }
-    .sepText{
+    .photo-caption{
       position:absolute;
       left: 22px;
       bottom: 18px;
-      right: 22px;
-      color: rgba(255,255,255,.90);
-      font-family: var(--script);
-      font-size: 52px;
-      text-shadow: 0 10px 40px rgba(0,0,0,.35);
-      letter-spacing: .02em;
-    }
-    @media (max-width: 680px){
-      .sepText{ font-size: 42px; }
-      .photoSeparator img{ height: 360px; }
+      z-index:2;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.76);
+      border: 1px solid rgba(255,255,255,.26);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 44px rgba(0,0,0,.18);
+      font-size: 12px;
+      letter-spacing:.22em;
+      text-transform: uppercase;
+      color: rgba(36,27,24,.76);
     }
 
-    /* Galería */
-    .galleryGrid{
+    /* ===== Galería ===== */
+    .grid{
+      margin-top: 14px;
       display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-top: 18px;
     }
-    @media (max-width: 820px){
-      .galleryGrid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-    }
-    .gItem{
-      border-radius: 18px;
+    @media (max-width: 560px){ .grid{ gap: 8px; } }
+
+    .thumb{
+      border-radius: 24px;
       overflow:hidden;
-      border: 1px solid rgba(110,80,70,.14);
-      background: rgba(255,255,255,.45);
-      box-shadow: 0 12px 26px rgba(25,18,14,.10);
+      border: 1px solid rgba(36,27,24,.10);
+      background: rgba(238,219,206,.12);
       cursor:pointer;
+      aspect-ratio: 1/1;
       position:relative;
+      box-shadow: 0 10px 30px rgba(36,27,24,.06);
+      transition: transform .22s ease, box-shadow .22s ease;
     }
-    .gItem img{
-      width:100%;
-      height: 190px;
-      object-fit:cover;
+    .thumb img{
+      width:100%; height:100%;
+      object-fit: cover;
       display:block;
-      transition: transform .35s ease, filter .35s ease;
-      transform: scale(1.03);
+      transition: transform .30s ease, filter .30s ease;
     }
-    .gItem:hover img{
-      transform: scale(1.08);
-      filter: contrast(1.02) saturate(1.04);
+    .thumb::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(230,209,166,.26), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.14));
+      opacity: 0;
+      transition: opacity .28s ease;
+      pointer-events:none;
     }
+    .thumb:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 18px 56px rgba(36,27,24,.10);
+    }
+    .thumb:hover img{ transform: scale(1.06); filter: contrast(1.02); }
+    .thumb:hover::after{ opacity: .55; }
 
     /* Lightbox */
     .lightbox{
-      position:fixed;
-      inset:0;
-      background: rgba(10,8,7,.78);
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.80);
       display:none;
       align-items:center;
       justify-content:center;
-      z-index: 200;
-      padding: 22px;
+      padding: 18px;
+      z-index: 999;
     }
     .lightbox.open{ display:flex; }
-    .lightboxInner{
-      width: min(980px, 100%);
-      border-radius: 22px;
+    .lb-content{ max-width: 980px; width:100%; max-height:86vh; display:flex; flex-direction:column; gap:10px; }
+    .lb-img{
+      background:#111;
+      border-radius: 18px;
       overflow:hidden;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.20);
-      box-shadow: 0 18px 80px rgba(0,0,0,.35);
-      position:relative;
+      border: 1px solid rgba(255,255,255,.12);
+      display:flex; align-items:center; justify-content:center;
+      max-height: 78vh;
+      box-shadow: 0 28px 90px rgba(0,0,0,.32);
     }
-    .lightboxInner img{
-      width:100%;
-      height: auto;
-      display:block;
-      background:#000;
+    .lb-img img{ max-width:100%; max-height:78vh; object-fit:contain; }
+    .lb-bar{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      color:#fff; font-size:14px; opacity:.92;
     }
-    .lbClose{
-      position:absolute;
-      top: 10px; right: 10px;
-      width: 44px; height: 44px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.30);
-      background: rgba(20,16,14,.55);
-      color: #fff;
-      font-size: 20px;
+    .lb-btn{
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      color:#fff;
+      padding: 10px 12px;
+      border-radius: 14px;
       cursor:pointer;
     }
 
-    /* Buenos deseos */
-    .wishesBand{
+    /* ===== Buenos deseos (con texto + fondo 06) ===== */
+    .wishes{ position:relative; overflow:hidden; }
+    .wishes-bg{ position:absolute; inset:0; background:#111; }
+    .wishes-bg img{
+      width:100%; height:100%;
+      object-fit: cover;
+      object-position: 50% 28%;
+      filter: blur(7px) contrast(1.02) saturate(1.02);
+      transform: scale(1.12);
+      opacity:.58;
+    }
+    .wishes-bg::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 520px at 50% 18%, rgba(201,164,106,.26), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.06));
+    }
+    .wishes-shell{ position:relative; padding: 18px; }
+    .wishes-arc{
+      width: min(900px, 100%);
+      margin: 0 auto;
+      border-radius: 999px 999px 34px 34px;
+      background: rgba(255,255,255,.22);
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 28px 110px rgba(0,0,0,.16);
+      padding: 26px 18px 18px;
+      text-align:center;
       position:relative;
       overflow:hidden;
     }
-    .wishesBg{
+    .wishes-arc::after{
+      content:"";
       position:absolute;
-      inset:0;
-      background: url("assets/06.jpg") center/cover no-repeat;
-      filter: blur(1px) saturate(1.02);
-      transform: scale(1.04);
+      top:-60%; left:-30%;
+      width: 60%;
+      height: 240%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.38), transparent);
+      transform: rotate(14deg) translateX(-160%);
+      animation: sheen2 8s ease-in-out infinite;
+      opacity: .55;
+      pointer-events:none;
     }
-    .wishesOverlay{
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.50));
+    @keyframes sheen2{
+      0%{ transform: rotate(14deg) translateX(-170%); }
+      45%{ transform: rotate(14deg) translateX(260%); }
+      100%{ transform: rotate(14deg) translateX(260%); }
     }
-    .wishesContent{
-      position:relative;
-      padding: 26px 18px 30px;
+
+    .w-title{
+      font-family:"Cormorant Garamond", ui-serif, Georgia, serif;
+      font-size: 56px;
+      margin: 0 0 6px;
+      color: rgba(36,27,24,.94);
+      letter-spacing:.2px;
     }
-    .wishesCard{
-      margin-top: 16px;
-      border-radius: 22px;
-      background: rgba(255,255,255,.52);
-      border: 1px solid rgba(255,255,255,.22);
-      box-shadow: 0 18px 60px rgba(0,0,0,.20);
-      backdrop-filter: blur(12px);
+    .w-sub{
+      margin: 0 auto 12px;
+      max-width: 560px;
+      color: rgba(36,27,24,.74);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .tap{ display:flex; justify-content:center; opacity:.86; margin: 6px 0 10px; }
+
+    .form{
+      width: min(900px, 100%);
+      margin: 12px auto 0;
       padding: 18px;
-      max-width: 820px;
-      margin-left:auto;
-      margin-right:auto;
-    }
-    .wishesCard p{
-      margin: 8px 0 0;
-      color: rgba(40,30,28,.90);
-      text-align:center;
-      line-height:1.7;
-    }
-    .formGrid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .input, .textarea{
-      width:100%;
-      border-radius: 16px;
-      border: 1px solid rgba(110,80,70,.20);
-      background: rgba(255,255,255,.64);
-      padding: 12px 14px;
-      font-family: var(--sans);
-      font-size: 14px;
-      outline:none;
-    }
-    .textarea{ min-height: 120px; resize: vertical; }
-    .note{
-      text-align:center;
-      font-size: 13px;
-      color: rgba(40,30,28,.80);
-      margin-top: 10px;
-    }
-
-    /* Footer */
-    footer{
-      margin-top: 28px;
-      text-align:center;
-      color: rgba(60,45,40,.72);
-      font-size: 12px;
-      letter-spacing:.08em;
-    }
-    .brand{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      justify-content:center;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.52);
-      border: 1px solid rgba(110,80,70,.14);
-      box-shadow: 0 10px 22px rgba(30,20,15,.08);
-    }
-    .brand img{
-      height: 18px;
-      width:auto;
-      display:block;
-      opacity:.9;
-    }
-
-    /* Overlay para iniciar audio */
-    .audioGate{
-      position:fixed;
-      inset:0;
-      z-index: 300;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 22px;
-      background: radial-gradient(900px 600px at 50% 30%, rgba(238,219,206,.42), rgba(0,0,0,.72));
-      backdrop-filter: blur(6px);
-    }
-    .gateCard{
-      width: min(520px, 100%);
-      border-radius: 26px;
-      background: rgba(255,255,255,.55);
+      border-radius: 34px;
+      background: rgba(255,255,255,.30);
       border: 1px solid rgba(255,255,255,.22);
-      box-shadow: 0 18px 80px rgba(0,0,0,.35);
-      padding: 22px 18px 18px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 24px 96px rgba(0,0,0,.14);
+      display:grid;
+      gap: 12px;
+    }
+    .field{
+      width:100%;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.16);
+      color: rgba(36,27,24,.92);
+      padding: 14px 14px;
+      outline:none;
+      font-size: 15px;
+    }
+    .field::placeholder{ color: rgba(36,27,24,.56); }
+    textarea.field{ min-height: 120px; resize: vertical; }
+
+    .send-row{ display:flex; justify-content:center; margin-top: 4px; }
+    .send{ min-width: 190px; }
+    .w-note{ margin: 10px auto 0; text-align:center; color: rgba(36,27,24,.72); font-size: 13px; min-height: 18px; }
+
+    /* Reveal */
+    .reveal{
+      opacity:0;
+      transform: translateY(18px);
+      filter: blur(8px);
+      transition: opacity .85s ease, transform .85s ease, filter .85s ease;
+    }
+    .reveal.in{ opacity:1; transform: translateY(0); filter: blur(0); }
+
+    /* Music floating */
+    .music-fab{
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 998;
+      display:flex; align-items:center; gap:10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(36,27,24,.12);
+      box-shadow: 0 14px 30px rgba(36,27,24,.12);
+      color: rgba(36,27,24,.92);
+      font-weight: 800;
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+      backdrop-filter: blur(12px);
+    }
+    .music-fab .dot{
+      width: 10px; height: 10px; border-radius: 999px;
+      background: linear-gradient(180deg, var(--gold2), var(--gold));
+      box-shadow: 0 0 0 9px rgba(201,164,106,.16);
+    }
+    .music-fab.hidden{ display:none; }
+
+    footer{
+      margin: 22px 0 30px;
       text-align:center;
+      color: rgba(36,27,24,.66);
+      font-size: 13px;
     }
-    .gateCard h3{
-      margin:0;
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: 28px;
-    }
-    .gateCard p{
-      margin: 10px auto 0;
-      color: rgba(40,30,28,.80);
-      line-height:1.6;
-      max-width: 420px;
-    }
+    .footer-logo{ margin-top: 10px; display:flex; justify-content:center; }
+    .footer-logo img{ height: 34px; width:auto; opacity:.92; filter: drop-shadow(0 10px 26px rgba(36,27,24,.10)); }
   </style>
 </head>
 
 <body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="paper" aria-hidden="true"></div>
 
-  <!-- NAV -->
-  <div class="topbar">
-    <nav class="navpill" aria-label="Navegación">
-      <a href="#inicio">Inicio</a>
-      <a href="#ubicaciones">Ubicaciones</a>
-      <a href="#mesa">Mesa</a>
-      <a href="#galeria">Galería</a>
-      <a href="#buenosdeseos">Buenos deseos</a>
-      <a href="#asistencia">Asistencia</a>
-    </nav>
+  <!-- Intro -->
+  <div class="intro" id="intro">
+    <div class="intro-card">
+      <div class="intro-bg">
+        <img src="assets/hero.jpg" alt="">
+      </div>
+      <div class="intro-body">
+        <h2 class="intro-title">Mis XV Años</h2>
+        <div class="intro-sub">Daira Pérez Romero · 28 de marzo · CDMX</div>
+
+        <div class="seal" id="sealBtn" aria-label="Abrir invitación">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3c3.9 0 7 3.1 7 7 0 2.2-1 4.2-2.6 5.5L18 21l-6-3-6 3 1.6-5.5C6 14.2 5 12.2 5 10c0-3.9 3.1-7 7-7Z" stroke="rgba(36,27,24,.86)" stroke-width="1.4" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="seal-hint">Toca el sello para abrir</div>
+      </div>
+    </div>
   </div>
 
-  <main class="wrap">
+  <div class="wrap">
 
-    <!-- HERO -->
-    <section id="inicio" class="hero" aria-label="Hero">
-      <img src="assets/hero.jpg" alt="Daira - Mis XV Años" />
-
-      <div class="heroCard">
-        <div class="heroMeta">
-          <span class="dot"></span>
-          <span>28 de marzo 2026 · Paseos de Churubusco, CDMX</span>
-        </div>
-
-        <h1 class="title">Mis XV Años, Daira</h1>
-        <p class="sub"><strong>Daira Pérez Romero</strong><br/>Misa <strong>15:00 hrs</strong> · Recepción <strong>16:30 hrs</strong></p>
-
-        <div class="dividerIcon" aria-hidden="true">
-          <span class="diamond"></span>
-        </div>
-
-        <div class="countGrid" aria-label="Cuenta regresiva">
-          <div class="countBox">
-            <p class="countNum" id="cd_days">--</p>
-            <p class="countLbl">Días</p>
-          </div>
-          <div class="countBox">
-            <p class="countNum" id="cd_hours">--</p>
-            <p class="countLbl">Horas</p>
-          </div>
-          <div class="countBox">
-            <p class="countNum" id="cd_minutes">--</p>
-            <p class="countLbl">Minutos</p>
-          </div>
-          <div class="countBox">
-            <p class="countNum" id="cd_seconds">--</p>
-            <p class="countLbl">Segundos</p>
-          </div>
-        </div>
-
-        <div class="heroActions">
-          <a class="btn btnGold" href="#asistencia">Confirmar asistencia</a>
-          <a class="btn btnGhost" href="#ubicaciones">Ver ubicaciones</a>
-          <a class="btn btnGhost" href="#mesa">Mesa de regalos</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- UBICACIONES -->
-    <section id="ubicaciones" class="band" style="margin-top:22px;">
-      <div class="bandTop"></div>
-      <div class="bandBody">
-        <div class="sectionTitle">
-          <h2>Ubicaciones</h2>
-          <span>Cómo llegar</span>
-        </div>
-
-        <p class="centerText">
-          Te esperamos para vivir un día inolvidable. Ambas ubicaciones están en <strong>Paseos de Churubusco, CDMX</strong>.
-        </p>
-
-        <div class="locGrid">
-
-          <!-- MISA -->
-          <article class="locCard">
-            <div class="locPhoto">
-              <img src="assets/misa.jpg" alt="Parroquia - Misa" />
-              <div class="locBadge">
-                <div class="timePill">
-                  15:00
-                  <small>Misa</small>
-                </div>
-                <div class="locBadgeText">
-                  <b>Parroquia de Nuestra Señora de la Paz</b>
-                  <span>Paseos de Churubusco · CDMX</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="locBody">
-              <div class="locMeta">
-                <strong>Dirección:</strong> Parroquia de Nuestra Señora de la Paz, Paseos de Churubusco, CDMX
-              </div>
-
-              <div class="mapWrap" aria-label="Mapa misa">
-                <!-- embed básico: funciona con maps.app.goo.gl como iframe en muchos casos -->
-                <iframe
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                  src="https://maps.google.com/maps?q=https%3A%2F%2Fmaps.app.goo.gl%2F7fiqxCDvtAW4DVUB8&output=embed">
-                </iframe>
-              </div>
-
-              <div class="locBtns">
-                <a class="btn btnGold" href="https://maps.app.goo.gl/7fiqxCDvtAW4DVUB8" target="_blank" rel="noopener">Abrir misa</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- RECEPCIÓN -->
-          <article class="locCard">
-            <div class="locPhoto">
-              <img src="assets/salon.jpg" alt="Salón - Recepción" />
-              <div class="locBadge">
-                <div class="timePill">
-                  16:30
-                  <small>Recepción</small>
-                </div>
-                <div class="locBadgeText">
-                  <b>Salón Grissel</b>
-                  <span>Paseos de Churubusco · CDMX</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="locBody">
-              <div class="locMeta">
-                <strong>Dirección:</strong> Salón Grissel, Paseos de Churubusco, CDMX
-              </div>
-
-              <div class="mapWrap" aria-label="Mapa recepción">
-                <iframe
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                  src="https://maps.google.com/maps?q=https%3A%2F%2Fmaps.app.goo.gl%2FLnk4KmBMn2SB23AW8&output=embed">
-                </iframe>
-              </div>
-
-              <div class="locBtns">
-                <a class="btn btnGold" href="https://maps.app.goo.gl/Lnk4KmBMn2SB23AW8" target="_blank" rel="noopener">Abrir recepción</a>
-              </div>
-            </div>
-          </article>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SEPARADOR FOTO 01 -->
-    <div class="photoSeparator" aria-label="Separador">
-      <img src="assets/01.jpg" alt="Daira" />
-      <div class="sepText">Nos vemos muy pronto ✨</div>
+    <div class="topbar">
+      <nav class="nav" aria-label="Menú">
+        <a href="#inicio">Inicio</a>
+        <a href="#ubicaciones">Ubicaciones</a>
+        <a href="#regalos">Mesa</a>
+        <a href="#galeria">Galería</a>
+        <a href="#buenosdeseos">Buenos deseos</a>
+        <a href="#confirmacion">Asistencia</a>
+      </nav>
     </div>
 
-    <!-- MESA DE REGALOS -->
-    <section id="mesa" class="band">
-      <div class="bandTop"></div>
-      <div class="bandBody">
-        <div class="sectionTitle">
-          <h2>Mesa de regalos</h2>
-          <span>Liverpool</span>
-        </div>
+    <!-- HERO -->
+    <header class="hero" id="inicio">
+      <div class="hero-frame">
+        <div class="hero-cover">
+          <img src="assets/hero.jpg" alt="Daira Pérez Romero">
 
-        <div class="centerText">
-          Tu presencia es lo más importante para nosotros, pero si además, quieres hacerme un regalo,
-          te comparto el link y número de mi mesa de regalos en Liverpool.
-          <br><br>
-          <strong>Número:</strong> 51947356
-        </div>
+          <div class="hero-panel">
+            <div class="kicker"><span class="kdot"></span> 28 de marzo 2026 · Paseos de Churubusco, CDMX</div>
 
-        <div style="display:flex; justify-content:center; margin-top:16px;">
-          <a class="btn btnGold" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51947356" target="_blank" rel="noopener">
-            Ir a Liverpool
-          </a>
-        </div>
-      </div>
-    </section>
+            <h1 class="title">Mis XV Años, Daira</h1>
 
-    <!-- GALERÍA -->
-    <section id="galeria" class="band">
-      <div class="bandTop"></div>
-      <div class="bandBody">
-        <div class="sectionTitle">
-          <h2>Galería</h2>
-          <span>Fotos</span>
-        </div>
-
-        <p class="centerText">
-          Toca o da click en una foto para verla en grande.
-        </p>
-
-        <div class="galleryGrid" id="galleryGrid" aria-label="Galería de fotos">
-          <!-- JS inyecta 01..09 -->
-        </div>
-      </div>
-    </section>
-
-    <!-- BUENOS DESEOS -->
-    <section id="buenosdeseos" class="band wishesBand">
-      <div class="wishesBg"></div>
-      <div class="wishesOverlay"></div>
-
-      <div class="wishesContent">
-        <div class="sectionTitle" style="border-bottom: 1px solid rgba(255,255,255,.24);">
-          <h2 style="color: rgba(255,255,255,.92);">Buenos deseos</h2>
-          <span style="color: rgba(255,255,255,.75);">Mensajito</span>
-        </div>
-
-        <div class="wishesCard">
-          <p>
-            <strong>Regálanos unas palabras y tu nombre para Daira, nuestra festejada.</strong>
-            <br>Tu mensaje quedará guardado como recuerdo ✨
-          </p>
-
-          <form id="wishesForm" class="formGrid" autocomplete="on">
-            <input class="input" id="w_name" type="text" placeholder="Tu nombre" required maxlength="70" />
-            <textarea class="textarea" id="w_message" placeholder="Escribe tu mensaje para Daira…" required maxlength="600"></textarea>
-
-            <div style="display:flex; justify-content:center; margin-top:6px;">
-              <button class="btn btnGold" type="submit">Enviar</button>
+            <div class="orn" aria-hidden="true">
+              <svg viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 20H120" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M180 20H290" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M150 10C145 14 140 16 135 20C140 24 145 26 150 30C155 26 160 24 165 20C160 16 155 14 150 10Z" stroke-width="1.5" stroke-linejoin="round"/>
+              </svg>
             </div>
 
-            <div class="note" id="w_note"></div>
-          </form>
+            <p class="sub">
+              <strong>Daira Pérez Romero</strong><br>
+              Misa <strong>15:00 hrs</strong> · Recepción <strong>16:30 hrs</strong>
+            </p>
+
+            <div class="countdown" aria-label="Cuenta regresiva">
+              <div class="tbox"><div class="num" id="dd">--</div><div class="lbl">Días</div></div>
+              <div class="tbox"><div class="num" id="hh">--</div><div class="lbl">Horas</div></div>
+              <div class="tbox"><div class="num" id="mm">--</div><div class="lbl">Minutos</div></div>
+              <div class="tbox"><div class="num" id="ss">--</div><div class="lbl">Segundos</div></div>
+            </div>
+
+            <div class="cta">
+              <a class="btn btn-primary" id="btn-whatsapp" href="#" target="_blank" rel="noopener">Confirmar asistencia</a>
+              <a class="btn btn-ghost" href="#ubicaciones">Ver ubicaciones</a>
+              <a class="btn btn-ghost" href="#regalos">Mesa de regalos</a>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+    </header>
 
-    <!-- ASISTENCIA -->
-    <section id="asistencia" class="band">
-      <div class="bandTop"></div>
-      <div class="bandBody">
-        <div class="sectionTitle">
-          <h2>Asistencia</h2>
-          <span>WhatsApp</span>
-        </div>
-
-        <p class="centerText">
-          Confirma tu asistencia por WhatsApp para ayudarte con cualquier detalle.
-        </p>
-
-        <div style="display:flex; justify-content:center; margin-top:16px;">
-          <a class="btn btnGold" id="waBtn" href="#" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
-        </div>
+    <!-- UBICACIONES -->
+    <div class="stage bgB reveal" id="ubicaciones">
+      <div class="stripe" aria-hidden="true"></div>
+      <div class="divider">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.92)" d="M0,96 C240,24 480,24 720,60 C960,96 1200,120 1440,84 L1440,120 L0,120 Z"></path>
+        </svg>
       </div>
-    </section>
 
-    <footer>
-      <div class="brand">
-        <span>Invitación creada por <strong>Invytia MX</strong></span>
-        <img src="assets/invytia-logo.png" alt="Invytia MX" />
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title">Ubicaciones</h2>
+          <div class="line"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-inner">
+            <div class="loc-grid">
+
+              <!-- MISA -->
+              <div class="loc-card">
+                <div class="loc-layout">
+                  <div class="loc-left">
+                    <div class="loc-photo">
+                      <img src="assets/misa.jpg" alt="Misa">
+                    </div>
+                    <div class="loc-info">
+                      <div class="loc-top">
+                        <div class="badge">
+                          <div class="t">15:00</div>
+                          <span class="s">MISA</span>
+                        </div>
+                        <div class="loc-text">
+                          <h3>Parroquia de Nuestra Señora de la Paz</h3>
+                          <p>Paseos de Churubusco, CDMX</p>
+                        </div>
+                      </div>
+                      <div class="loc-actions">
+                        <a class="btn btn-primary" href="https://maps.app.goo.gl/7fiqxCDvtAW4DVUB8" target="_blank" rel="noopener">Abrir misa</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="map">
+                    <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                      src="https://www.google.com/maps?q=Parroquia%20de%20Nuestra%20Se%C3%B1ora%20de%20la%20Paz%20Paseos%20de%20Churubusco%20CDMX&output=embed"></iframe>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RECEPCIÓN -->
+              <div class="loc-card">
+                <div class="loc-layout">
+                  <div class="loc-left">
+                    <div class="loc-photo">
+                      <img src="assets/salon.jpg" alt="Recepción">
+                    </div>
+                    <div class="loc-info">
+                      <div class="loc-top">
+                        <div class="badge">
+                          <div class="t">16:30</div>
+                          <span class="s">RECEPCIÓN</span>
+                        </div>
+                        <div class="loc-text">
+                          <h3>Salón Grissel</h3>
+                          <p>Paseos de Churubusco, CDMX</p>
+                        </div>
+                      </div>
+                      <div class="loc-actions">
+                        <a class="btn btn-primary" href="https://maps.app.goo.gl/Lnk4KmBMn2SB23AW8" target="_blank" rel="noopener">Abrir recepción</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="map">
+                    <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                      src="https://www.google.com/maps?q=Sal%C3%B3n%20Grissel%20Paseos%20de%20Churubusco%20CDMX&output=embed"></iframe>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- separador foto -->
+        <div class="photo-break">
+          <img src="assets/gallery/01.jpg" alt="Daira">
+          <div class="photo-caption">Un día para recordar</div>
+        </div>
+
+      </section>
+
+      <div class="divider alt">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.95)" d="M0,36 C240,90 480,96 720,66 C960,36 1200,18 1440,48 L1440,0 L0,0 Z"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- MESA (centrado) -->
+    <div class="stage bgA reveal" id="regalos">
+      <div class="stripe" aria-hidden="true"></div>
+      <div class="divider">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.92)" d="M0,96 C240,24 480,24 720,60 C960,96 1200,120 1440,84 L1440,120 L0,120 Z"></path>
+        </svg>
+      </div>
+
+      <section class="section centered">
+        <div class="section-head">
+          <h2 class="section-title">Mesa de regalos</h2>
+          <div class="line"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-inner">
+            <p class="info">
+              <strong>Tu presencia es lo más importante para nosotros.</strong><br>
+              Pero si además quieres hacerme un regalo, te comparto el link y número de mi mesa de regalos en Liverpool.
+            </p>
+
+            <div style="margin-top:16px; font-family:'Cormorant Garamond',serif; font-size:38px; font-weight:700; color:rgba(36,27,24,.92);">
+              51947356
+            </div>
+            <div style="margin-top:6px; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:rgba(36,27,24,.58);">
+              Número de mesa
+            </div>
+
+            <div class="actions" style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn btn-primary" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51947356" target="_blank" rel="noopener">Ir a Liverpool</a>
+              <button class="btn btn-ghost" id="copyGift" type="button">Copiar número</button>
+            </div>
+
+            <p class="info" id="copyGiftHint" style="margin-top:12px;"></p>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider alt">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.95)" d="M0,36 C240,90 480,96 720,66 C960,36 1200,18 1440,48 L1440,0 L0,0 Z"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- GALERÍA -->
+    <div class="stage bgC reveal" id="galeria">
+      <div class="stripe" aria-hidden="true"></div>
+      <div class="divider">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.92)" d="M0,96 C240,24 480,24 720,60 C960,96 1200,120 1440,84 L1440,120 L0,120 Z"></path>
+        </svg>
+      </div>
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title">Galería</h2>
+          <div class="line"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-inner">
+            <p class="info" style="text-align:center;">Toca una foto para verla en grande.</p>
+
+            <div class="grid" id="galleryGrid">
+              <div class="thumb"><img src="assets/gallery/01.jpg" alt="Foto 1" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/02.jpg" alt="Foto 2" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/03.jpg" alt="Foto 3" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/04.jpg" alt="Foto 4" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/05.jpg" alt="Foto 5" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/06.jpg" alt="Foto 6" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/07.jpg" alt="Foto 7" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/08.jpg" alt="Foto 8" loading="lazy"></div>
+              <div class="thumb"><img src="assets/gallery/09.jpg" alt="Foto 9" loading="lazy"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider alt">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.95)" d="M0,36 C240,90 480,96 720,66 C960,36 1200,18 1440,48 L1440,0 L0,0 Z"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- BUENOS DESEOS -->
+    <div class="stage bgB reveal" id="buenosdeseos">
+      <div class="stripe" aria-hidden="true"></div>
+      <div class="divider">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.92)" d="M0,96 C240,24 480,24 720,60 C960,96 1200,120 1440,84 L1440,120 L0,120 Z"></path>
+        </svg>
+      </div>
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title">Buenos deseos</h2>
+          <div class="line"></div>
+        </div>
+
+        <div class="panel wishes">
+          <div class="wishes-bg">
+            <img src="assets/gallery/06.jpg" alt="">
+          </div>
+
+          <div class="wishes-shell">
+            <div class="wishes-arc">
+              <div class="w-title">Buenos deseos</div>
+              <p class="w-sub">Regálanos unas palabras y tu nombre para Daira, nuestra festejada.</p>
+
+              <div class="tap" aria-hidden="true">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 11V7a1 1 0 0 1 2 0v4" stroke="rgba(36,27,24,.80)" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M10 11V6a1 1 0 0 1 2 0v5" stroke="rgba(36,27,24,.80)" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M12 11V7a1 1 0 0 1 2 0v4" stroke="rgba(36,27,24,.80)" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M14 11V8a1 1 0 0 1 2 0v6c0 2-1.5 4-4 4h-1.5c-1.4 0-2.7-.6-3.6-1.7L5 14.5" stroke="rgba(36,27,24,.80)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+
+            <form class="form" id="wishesForm" autocomplete="off">
+              <input class="field" name="name" id="wName" placeholder="Nombre" required />
+              <textarea class="field" name="message" id="wMsg" placeholder="Mensaje o comentario" required></textarea>
+              <div class="send-row">
+                <button class="btn btn-primary send" id="wSend" type="submit">Enviar</button>
+              </div>
+            </form>
+
+            <div class="w-note" id="wNote"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider alt">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.95)" d="M0,36 C240,90 480,96 720,66 C960,36 1200,18 1440,48 L1440,0 L0,0 Z"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- CONFIRMACIÓN (centrado) -->
+    <div class="stage bgA reveal" id="confirmacion">
+      <div class="stripe" aria-hidden="true"></div>
+      <div class="divider">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.92)" d="M0,96 C240,24 480,24 720,60 C960,96 1200,120 1440,84 L1440,120 L0,120 Z"></path>
+        </svg>
+      </div>
+
+      <section class="section centered">
+        <div class="section-head">
+          <h2 class="section-title">Confirmación</h2>
+          <div class="line"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-inner">
+            <p class="info">Confirma tu asistencia por WhatsApp.</p>
+            <div class="actions" style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn btn-primary" id="btn-whatsapp-2" href="#" target="_blank" rel="noopener">Confirmar ahora</a>
+              <a class="btn btn-ghost" href="#inicio">Volver arriba</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider alt">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path fill="rgba(251,246,244,0.95)" d="M0,36 C240,90 480,96 720,66 C960,36 1200,18 1440,48 L1440,0 L0,0 Z"></path>
+        </svg>
+      </div>
+    </div>
+
+    <footer class="reveal">
+      <div>Invitación creada por <strong>Invytia MX</strong></div>
+      <div class="footer-logo">
+        <img src="assets/logo-invytia.png" alt="Invytia MX">
       </div>
     </footer>
 
-  </main>
+  </div>
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lightboxInner">
-      <button class="lbClose" id="lbClose" aria-label="Cerrar">×</button>
-      <img id="lbImg" src="" alt="Foto ampliada">
-    </div>
-  </div>
-
-  <!-- Audio Gate (para iniciar música) -->
-  <div class="audioGate" id="audioGate">
-    <div class="gateCard">
-      <h3>Bienvenidos ✨</h3>
-      <p>Para escuchar la música y vivir la experiencia completa, toca el botón.</p>
-      <div style="display:flex; justify-content:center; margin-top:14px;">
-        <button class="btn btnGold" id="startAudioBtn">Iniciar invitación</button>
+    <div class="lb-content">
+      <div class="lb-bar">
+        <div id="lbCounter">Foto</div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <button class="lb-btn" id="lbPrev" type="button">←</button>
+          <button class="lb-btn" id="lbNext" type="button">→</button>
+          <button class="lb-btn" id="lbClose" type="button">Cerrar ✕</button>
+        </div>
       </div>
-      <p style="font-size:12px; opacity:.85; margin-top:10px;">
-        (Los navegadores bloquean el autoplay sin interacción.)
-      </p>
+      <div class="lb-img">
+        <img id="lbImg" src="" alt="Foto en grande">
+      </div>
     </div>
   </div>
 
-  <audio id="bgMusic" src="assets/song.mp3" preload="auto" loop></audio>
+  <!-- Música -->
+  <div class="music-fab hidden" id="musicFab" role="button" aria-label="Música">
+    <span class="dot" aria-hidden="true"></span>
+    <span id="musicFabText">Música</span>
+  </div>
+
+  <audio id="audio" preload="auto">
+    <source src="assets/song.mp3" type="audio/mpeg" />
+  </audio>
 
   <script>
-    // ===== CONFIG =====
-    const EVENT_DATE = new Date("2026-03-28T15:00:00-06:00"); // misa 15:00 CDMX
+    // Termina a la misa: 28 marzo 2026 15:00
+    const EVENT_DATE = new Date(2026, 2, 28, 15, 0, 0);
+
+    // WhatsApp
     const WHATSAPP_NUMBER = "525532327877";
-    const WHATSAPP_MESSAGE = "Hola, quiero confirmar mi asistencia a los XV años de Daira. ✨";
-    const WISHES_ENDPOINT = "https://script.google.com/macros/s/AKfycbzrN_iecFpXJXlzKfEZk2dXz31W7acPKv6jJRT0vaJ67NYSegnW5YLPkObt-U4nDSLf/exec";
+    const WHATSAPP_MESSAGE = "Hola, confirmo mi asistencia a los XV años de Daira Pérez Romero. Mi nombre es: _____. Asistiremos: ____ personas. ¡Gracias!";
 
-    // ===== WhatsApp =====
-    const waBtn = document.getElementById("waBtn");
+    // Buenos deseos -> Sheets (Apps Script /exec)
+    const WISHES_ENDPOINT = "https://script.google.com/macros/s/AKfycby0zVVcDqoqNsoSsFhtss4qqyqd94yMQBQWe93cf9JAb4LjpoMmb_9ORQ683QuhF-lN/exec";
+
+    // WhatsApp links
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-    waBtn.href = waUrl;
+    document.getElementById("btn-whatsapp").href = waUrl;
+    document.getElementById("btn-whatsapp-2").href = waUrl;
 
-    // ===== Cuenta regresiva =====
-    const cdDays = document.getElementById("cd_days");
-    const cdHours = document.getElementById("cd_hours");
-    const cdMinutes = document.getElementById("cd_minutes");
-    const cdSeconds = document.getElementById("cd_seconds");
-
-    function pad2(n){ return String(n).padStart(2,"0"); }
+    // Countdown
+    const dd = document.getElementById("dd");
+    const hh = document.getElementById("hh");
+    const mm = document.getElementById("mm");
+    const ss = document.getElementById("ss");
+    const pad = (n) => String(n).padStart(2,"0");
 
     function tick(){
       const now = new Date();
-      let diff = EVENT_DATE.getTime() - now.getTime();
-      if (diff < 0) diff = 0;
+      const diff = EVENT_DATE - now;
+      if(diff <= 0){
+        dd.textContent="00"; hh.textContent="00"; mm.textContent="00"; ss.textContent="00";
+        return;
+      }
+      const t = Math.floor(diff/1000);
+      const days = Math.floor(t/86400);
+      const hours = Math.floor((t%86400)/3600);
+      const mins = Math.floor((t%3600)/60);
+      const secs = t%60;
 
-      const totalSeconds = Math.floor(diff / 1000);
-      const days = Math.floor(totalSeconds / (3600 * 24));
-      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
-
-      cdDays.textContent = days;
-      cdHours.textContent = pad2(hours);
-      cdMinutes.textContent = pad2(minutes);
-      cdSeconds.textContent = pad2(seconds);
+      dd.textContent = String(days);
+      hh.textContent = pad(hours);
+      mm.textContent = pad(mins);
+      ss.textContent = pad(secs);
     }
-    tick();
-    setInterval(tick, 1000);
+    tick(); setInterval(tick, 1000);
 
-    // ===== Galería 01..09 =====
-    const galleryGrid = document.getElementById("galleryGrid");
+    // Copy gift number
+    const copyGiftBtn = document.getElementById("copyGift");
+    const copyGiftHint = document.getElementById("copyGiftHint");
+    copyGiftBtn.addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText("51947356");
+        copyGiftHint.textContent = "Copiado ✅";
+      }catch(e){
+        copyGiftHint.textContent = "51947356";
+      }
+    });
+
+    // Reveal animations
+    const revealEls = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    // Lightbox
+    const grid = document.getElementById("galleryGrid");
+    const thumbs = Array.from(grid.querySelectorAll("img"));
     const lightbox = document.getElementById("lightbox");
     const lbImg = document.getElementById("lbImg");
+    const lbCounter = document.getElementById("lbCounter");
     const lbClose = document.getElementById("lbClose");
+    const lbPrev = document.getElementById("lbPrev");
+    const lbNext = document.getElementById("lbNext");
+    let currentIndex = 0;
 
-    function openLightbox(src){
-      lbImg.src = src;
+    function openLightbox(index){
+      currentIndex = index;
+      lbImg.src = thumbs[currentIndex].src;
+      lbCounter.textContent = `Foto ${currentIndex+1} de ${thumbs.length}`;
       lightbox.classList.add("open");
-      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow="hidden";
     }
     function closeLightbox(){
       lightbox.classList.remove("open");
-      lightbox.setAttribute("aria-hidden", "true");
-      lbImg.src = "";
+      document.body.style.overflow="";
+      lbImg.src="";
     }
+    thumbs.forEach((img, idx) => {
+      img.addEventListener("click", () => openLightbox(idx));
+      img.parentElement.tabIndex = 0;
+      img.parentElement.setAttribute("role","button");
+    });
     lbClose.addEventListener("click", closeLightbox);
+    lbPrev.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + thumbs.length) % thumbs.length;
+      lbImg.src = thumbs[currentIndex].src;
+      lbCounter.textContent = `Foto ${currentIndex+1} de ${thumbs.length}`;
+    });
+    lbNext.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % thumbs.length;
+      lbImg.src = thumbs[currentIndex].src;
+      lbCounter.textContent = `Foto ${currentIndex+1} de ${thumbs.length}`;
+    });
     lightbox.addEventListener("click", (e) => { if(e.target === lightbox) closeLightbox(); });
-    document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeLightbox(); });
+    window.addEventListener("keydown", (e) => {
+      if(!lightbox.classList.contains("open")) return;
+      if(e.key === "Escape") closeLightbox();
+      if(e.key === "ArrowLeft") lbPrev.click();
+      if(e.key === "ArrowRight") lbNext.click();
+    });
 
-    for(let i=1;i<=9;i++){
-      const nn = String(i).padStart(2,"0");
-      const src = `assets/${nn}.jpg`;
+    // Music autoplay + toggle
+    const audio = document.getElementById("audio");
+    const musicFab = document.getElementById("musicFab");
+    const musicFabText = document.getElementById("musicFabText");
+    let playing = false;
 
-      const div = document.createElement("div");
-      div.className = "gItem";
-      div.innerHTML = `<img src="${src}" alt="Foto ${nn}" loading="lazy">`;
-      div.addEventListener("click", ()=> openLightbox(src));
-      galleryGrid.appendChild(div);
-    }
-
-    // ===== Audio gate =====
-    const audioGate = document.getElementById("audioGate");
-    const startAudioBtn = document.getElementById("startAudioBtn");
-    const bgMusic = document.getElementById("bgMusic");
-
-    async function startAudio(){
+    function setFabLabel(){ musicFabText.textContent = playing ? "Pausar" : "Música"; }
+    async function tryAutoPlay(){
       try{
-        await bgMusic.play();
-      }catch(e){
-        // si falla, igual quitamos el gate para que naveguen
+        audio.volume = 0.85;
+        await audio.play();
+        playing = true;
+        setFabLabel();
+        musicFab.classList.remove("hidden");
+      }catch(err){
+        playing = false;
+        setFabLabel();
+        musicFab.classList.remove("hidden");
       }
-      audioGate.style.display = "none";
     }
-    startAudioBtn.addEventListener("click", startAudio);
 
-    // ===== Buenos deseos -> Sheets =====
+    musicFab.addEventListener("click", async () => {
+      try{
+        if(!playing){ await audio.play(); playing = true; }
+        else{ audio.pause(); playing = false; }
+        setFabLabel();
+      }catch(e){
+        playing = false; setFabLabel();
+      }
+    });
+
+    // Intro open -> starts music (en móvil requiere gesto del usuario: el click del sello lo cumple)
+    const intro = document.getElementById("intro");
+    const sealBtn = document.getElementById("sealBtn");
+    sealBtn.addEventListener("click", async () => {
+      intro.classList.add("hidden");
+      tryAutoPlay();
+    });
+
+    // Buenos deseos -> Google Sheets via Apps Script
     const wishesForm = document.getElementById("wishesForm");
-    const wName = document.getElementById("w_name");
-    const wMessage = document.getElementById("w_message");
-    const wNote = document.getElementById("w_note");
+    const wNote = document.getElementById("wNote");
+    const wSend = document.getElementById("wSend");
 
     wishesForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const name = (wName.value || "").trim();
-      const message = (wMessage.value || "").trim();
+      const name = document.getElementById("wName").value.trim();
+      const message = document.getElementById("wMsg").value.trim();
 
-      if(!name || !message){
-        wNote.textContent = "Por favor escribe tu nombre y tu mensaje.";
+      if (!name || !message) {
+        wNote.textContent = "Por favor completa tu nombre y tu mensaje.";
         return;
       }
 
+      wSend.disabled = true;
+      wSend.style.opacity = "0.72";
       wNote.textContent = "Enviando…";
-      let sent = false;
-
-      const payload = {
-        name,
-        message,
-        sheetName: "Hoja 1",
-        userAgent: navigator.userAgent
-      };
 
       try {
-        // intento normal (lee JSON)
         const res = await fetch(WISHES_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({ name, message, userAgent: navigator.userAgent })
         });
-        const data = await res.json();
-        sent = !!(data && data.ok);
-      } catch (e1) {
-        // fallback NO-CORS: manda aunque no puedas leer respuesta
-        try {
-          await fetch(WISHES_ENDPOINT, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "text/plain;charset=utf-8" },
-            body: JSON.stringify(payload)
-          });
-          sent = true;
-        } catch (e2) {
-          sent = false;
-        }
-      }
 
-      if(sent){
-        wNote.textContent = "¡Gracias! Tu mensaje fue enviado ✨";
-        wishesForm.reset();
-      }else{
+        const data = await res.json().catch(() => ({}));
+        if (data && data.ok) {
+          wNote.textContent = "¡Gracias! Tu mensaje fue enviado ✨";
+          wishesForm.reset();
+        } else {
+          wNote.textContent = "No se pudo enviar. Intenta de nuevo en unos segundos.";
+        }
+      } catch (err) {
         wNote.textContent = "No se pudo enviar. Revisa tu conexión e intenta de nuevo.";
+      } finally {
+        wSend.disabled = false;
+        wSend.style.opacity = "1";
       }
     });
   </script>
