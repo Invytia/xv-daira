@@ -233,7 +233,6 @@
       position:relative;
       isolation:isolate;
     }
-    /* borde interior tipo marco editorial */
     .hero-frame::before{
       content:"";
       position:absolute; inset: 12px;
@@ -282,7 +281,6 @@
       z-index: 2;
     }
 
-    /* Panel glass + foil highlight */
     .hero-panel{
       position:absolute;
       left: 50%;
@@ -307,7 +305,6 @@
       opacity:.85;
       pointer-events:none;
     }
-    /* brillo foil */
     .hero-panel::after{
       content:"";
       position:absolute;
@@ -478,7 +475,6 @@
     .stage.bgB{ background: var(--bgB); }
     .stage.bgC{ background: var(--bgC); }
 
-    /* franja superior tipo editorial */
     .stripe{
       height: 34px;
       background:
@@ -566,7 +562,6 @@
     }
     .info strong{ color: rgba(36,27,24,.90); }
 
-    /* Centrados para Mesa y Confirmación */
     .centered .panel-inner{ padding: 26px 18px; text-align:center; }
     .centered .info{ text-align:center; }
     .centered .actions{ justify-content:center; }
@@ -818,7 +813,7 @@
       cursor:pointer;
     }
 
-    /* ===== Buenos deseos (con texto + fondo 06) ===== */
+    /* ===== Buenos deseos ===== */
     .wishes{ position:relative; overflow:hidden; }
     .wishes-bg{ position:absolute; inset:0; background:#111; }
     .wishes-bg img{
@@ -913,7 +908,6 @@
     .send{ min-width: 190px; }
     .w-note{ margin: 10px auto 0; text-align:center; color: rgba(36,27,24,.72); font-size: 13px; min-height: 18px; }
 
-    /* Reveal */
     .reveal{
       opacity:0;
       transform: translateY(18px);
@@ -922,7 +916,6 @@
     }
     .reveal.in{ opacity:1; transform: translateY(0); filter: blur(0); }
 
-    /* Music floating */
     .music-fab{
       position: fixed;
       right: 14px;
@@ -1356,8 +1349,8 @@
     const WHATSAPP_NUMBER = "525532327877";
     const WHATSAPP_MESSAGE = "Hola, confirmo mi asistencia a los XV años de Daira Pérez Romero. Mi nombre es: _____. Asistiremos: ____ personas. ¡Gracias!";
 
-    // ✅ Buenos deseos -> Sheets (TU URL /exec)
-    const WISHES_ENDPOINT = "https://script.google.com/macros/s/AKfycbzbMRXY8O_3-mGDr5CTlRFkfzaBj0GgyZXK4skoaML1DAVHE7vUi5BspTOkrG88P2Kf7w/exec";
+    // ✅ Buenos deseos -> Sheets (Apps Script /exec) (TU LINK NUEVO)
+    const WISHES_ENDPOINT = "https://script.google.com/macros/s/AKfycbxUh7uZkVTN59Ik_yICbq5YWTo388qfjJEiSi2B351f3zfk3DB-uMvA4eBEW8puejMlsg/exec";
     const WISHES_SHEET_NAME = "Hoja 1";
 
     // WhatsApp links
@@ -1494,7 +1487,7 @@
       }
     });
 
-    // Intro open -> starts music (en móvil requiere gesto del usuario: el click del sello lo cumple)
+    // Intro open -> starts music
     const intro = document.getElementById("intro");
     const sealBtn = document.getElementById("sealBtn");
     sealBtn.addEventListener("click", async () => {
@@ -1502,7 +1495,7 @@
       tryAutoPlay();
     });
 
-    // ✅ Buenos deseos -> Google Sheets via Apps Script
+    // ✅ Buenos deseos (SIN headers JSON para evitar preflight/CORS)
     const wishesForm = document.getElementById("wishesForm");
     const wNote = document.getElementById("wNote");
     const wSend = document.getElementById("wSend");
@@ -1522,29 +1515,33 @@
       wSend.style.opacity = "0.72";
       wNote.textContent = "Enviando…";
 
+      const payload = {
+        name,
+        message,
+        sheetName: WISHES_SHEET_NAME,
+        userAgent: navigator.userAgent
+      };
+
       try {
         const response = await fetch(WISHES_ENDPOINT, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name,
-            message,
-            sheetName: WISHES_SHEET_NAME,
-            userAgent: navigator.userAgent
-          })
+          body: JSON.stringify(payload) // text/plain por defecto
         });
 
-        const result = await response.json().catch(() => ({}));
+        let result = null;
+        try { result = await response.json(); } catch(_) {}
 
         if (result && result.ok) {
           wNote.textContent = "¡Gracias! Tu mensaje fue enviado ✨";
           wishesForm.reset();
+        } else if (!result) {
+          wNote.textContent = "¡Listo! Mensaje enviado ✨";
+          wishesForm.reset();
         } else {
-          const msg = (result && result.error) ? result.error : "Error desconocido";
-          wNote.textContent = "No se pudo guardar en la hoja: " + msg;
+          wNote.textContent = "No se pudo guardar: " + (result.error || "Error desconocido");
         }
       } catch (err) {
-        wNote.textContent = "No se pudo enviar. Revisa tu conexión e intenta de nuevo.";
+        wNote.textContent = "No se pudo enviar. Revisa tu implementación de Apps Script e intenta de nuevo.";
       } finally {
         wSend.disabled = false;
         wSend.style.opacity = "1";
